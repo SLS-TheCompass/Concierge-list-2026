@@ -570,6 +570,11 @@ html.checking #splash { display:flex; }
     ];
     window.__MASTER_ID__ = MASTER_ID;
     window.__ID_KEY__ = 'sls_staff_id_v1';
+    window.__MASTER_VERIFIED_KEY__ = 'sls_master_verified_v1';
+    // SHA-256 of the master PIN. The PIN itself is never stored anywhere, only this hash.
+    // Knowing the Staff ID SLS154385 alone is not enough to reach Staff Access or Activity
+    // Overview - this PIN is asked for separately, once per device, the first time that ID is used.
+    window.__MASTER_PIN_HASH__ = "280f901c59debf0fe1430ba5a66dda9399fe085057ae8f1205743b06665d2c78";
 
     // Older personal links (?u=STAFFID) still work and log this device in automatically.
     // New visitors with no link at all will be asked to log in with their Staff ID instead.
@@ -581,6 +586,9 @@ html.checking #splash { display:flex; }
     window.__STAFF_ID__ = staffId;
     window.__ID_SOURCE__ = urlId ? 'url' : (storedId ? 'storage' : 'none');
     window.__IS_MASTER__ = !!staffId && staffId === MASTER_ID;
+    var masterVerified = false;
+    try { masterVerified = localStorage.getItem(window.__MASTER_VERIFIED_KEY__) === '1'; } catch (e) {}
+    window.__MASTER_VERIFIED__ = window.__IS_MASTER__ && masterVerified;
     document.documentElement.classList.add('checking');
   })();
 </script>
@@ -1684,7 +1692,7 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
       if (!r.ok) { actMsg('Could not load activity (error ' + r.status + ').', 'err'); return; }
       var byId = {};
       (r.data.hits || []).forEach(function (hit) {
-        var m = /^(home|concierge|book|admin)-([A-Za-z0-9]+)$/.exec(hit.path || '');
+        var m = /(home|concierge|book|admin)-([A-Za-z0-9]+)$/i.exec(hit.path || '');
         if (!m) return;
         var kind = m[1], id = m[2].toUpperCase();
         if (!byId[id]) byId[id] = { total: 0, last: null };
@@ -1788,6 +1796,71 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
       });
   }
 
+  // Hashes text with SHA-256 and returns it as a lowercase hex string.
+  function sha256Hex(text) {
+    var enc = new TextEncoder().encode(text);
+    return crypto.subtle.digest('SHA-256', enc).then(function (buf) {
+      var bytes = new Uint8Array(buf), hex = '';
+      for (var i = 0; i < bytes.length; i++) { var h = bytes[i].toString(16); hex += h.length === 1 ? '0' + h : h; }
+      return hex;
+    });
+  }
+
+  // A correct Staff ID match for SLS154385 (master) is not enough on its own to reach
+  // Staff Access or Activity Overview, since colleagues in the department can know each
+  // other's Staff IDs. This PIN is asked for separately, the first time that ID is used
+  // on a given device, and remembered on that device afterward.
+  function showMasterPin(errorMsg) {
+    var splash = document.getElementById('splash');
+    if (splash) splash.style.display = 'none';
+    var box = document.getElementById('loginScreen');
+    box.className = 'login-wrap';
+    box.style.display = 'flex';
+    box.innerHTML =
+      '<div class="login-card">' +
+      '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="none" stroke="#A9812E" stroke-width="4"/><path d="M50 22 L60 50 L50 78 L40 50 Z" fill="#A9812E"/><circle cx="50" cy="50" r="5" fill="#FBF8F2"/></svg>' +
+      '<p class="login-title">Master Access</p>' +
+      '<p class="login-sub">This Staff ID has extra privileges. Enter the master PIN to continue.</p>' +
+      (errorMsg ? '<p class="login-msg err">' + errorMsg + '</p>' : '') +
+      '<input type="password" id="pinInput" class="login-input" placeholder="PIN" autocomplete="off" inputmode="numeric">' +
+      '<button id="pinBtn" class="login-btn">Continue</button>' +
+      '<p class="login-foot"><a href="#" id="pinBack" style="color:#16332B;font-weight:600;">Not you? Go back</a></p>' +
+      '</div>';
+    var input = document.getElementById('pinInput'), btn = document.getElementById('pinBtn');
+    input.focus();
+    function submit() {
+      var pin = input.value.trim();
+      if (!pin) return;
+      btn.disabled = true; btn.textContent = 'Checking…';
+      sha256Hex(pin).then(function (hash) {
+        if (hash === window.__MASTER_PIN_HASH__) {
+          try { localStorage.setItem(window.__MASTER_VERIFIED_KEY__, '1'); } catch (e) {}
+          window.__MASTER_VERIFIED__ = true;
+          box.style.display = 'none';
+          start();
+        } else {
+          showMasterPin('Incorrect PIN. Please try again.');
+        }
+      });
+    }
+    btn.addEventListener('click', submit);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') submit(); });
+    document.getElementById('pinBack').addEventListener('click', function (e) {
+      e.preventDefault();
+      try { localStorage.removeItem(window.__ID_KEY__); } catch (err) {}
+      try { localStorage.removeItem(window.__MASTER_VERIFIED_KEY__); } catch (err) {}
+      location.href = location.pathname;
+    });
+  }
+
+  // Call this instead of start() directly, anywhere a Staff ID has just passed checkAccess.
+  // It routes master through the PIN step first, unless this device already has it verified.
+  function proceedAfterLogin(id) {
+    window.__STAFF_ID__ = id;
+    window.__IS_MASTER__ = (id === window.__MASTER_ID__);
+    if (window.__IS_MASTER__ && !window.__MASTER_VERIFIED__) { showMasterPin(); } else { start(); }
+  }
+
   // ---------- Login screen (used for a shared link, or when a saved/linked ID is no longer valid) ----------
   // This only ever touches #loginScreen and #splash - the rest of the page (the actual app)
   // stays intact underneath, hidden by CSS, so a successful login can reveal it via start()
@@ -1817,10 +1890,8 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
       checkAccess(id).then(function (r) {
         if (r.ok) {
           try { localStorage.setItem(window.__ID_KEY__, id); } catch (e) {}
-          window.__STAFF_ID__ = id;
-          window.__IS_MASTER__ = (id === window.__MASTER_ID__);
           box.style.display = 'none';
-          start();
+          proceedAfterLogin(id);
         } else if (r.reason === 'offline') {
           showLogin('Could not check that Staff ID just now. Please check your connection and try again.', true);
         } else {
@@ -1891,6 +1962,7 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
       e.preventDefault();
       if (!window.confirm('Switch to a different Staff ID on this device?')) return;
       try { localStorage.removeItem(window.__ID_KEY__); } catch (err) {}
+      try { localStorage.removeItem(window.__MASTER_VERIFIED_KEY__); } catch (err) {}
       location.href = location.pathname; // drop any ?u= and #hash so the login screen shows fresh
     });
     if (window.__IS_MASTER__) document.getElementById('tileAdmin').style.display = 'block';
@@ -1906,7 +1978,7 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
       // A link with ?u= worked: remember this device so future visits (and the shared
       // link/QR without any ID) go straight to the login screen only once, not every time.
       if (window.__ID_SOURCE__ === 'url') { try { localStorage.setItem(window.__ID_KEY__, window.__STAFF_ID__); } catch (e) {} }
-      start();
+      proceedAfterLogin(window.__STAFF_ID__);
     } else if (r.reason === 'offline') {
       blockPage('offline');
     } else if (window.__STAFF_ID__) {
