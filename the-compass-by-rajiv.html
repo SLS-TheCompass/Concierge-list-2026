@@ -544,6 +544,15 @@ html.checking #splash { display:flex; }
 .app-admin .msg.err{ display:block; background:#FBE4E1; color:#A6342A; }
 .app-admin .linkbox{ background:var(--cream); border:1px dashed var(--brass-light); border-radius:8px; padding:12px; margin-top:12px; font-size:12.5px; }
 .app-admin .linkbox .u{ word-break:break-all; margin:6px 0 10px; color:var(--ink); }
+.app-admin .act-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:9px 0; border-top:1px solid var(--line); }
+.app-admin .act-row:first-child{ border-top:none; }
+.app-admin .act-row .who .id{ font-weight:700; color:var(--pine); font-size:13.5px; }
+.app-admin .act-row .who .nm{ font-size:12px; color:var(--ink-soft); margin-top:1px; }
+.app-admin .act-row .nums{ text-align:right; font-size:12.5px; color:var(--ink); white-space:nowrap; }
+.app-admin .act-row .nums .n{ font-weight:700; color:var(--brass); }
+.app-admin .act-row.never{ opacity:.55; }
+.app-admin .act-head{ display:flex; justify-content:space-between; font-size:11px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.03em; padding-bottom:6px; }
+
 </style>
 </head>
 <body>
@@ -739,6 +748,28 @@ html.checking #splash { display:flex; }
       <textarea id="aNames" rows="4" placeholder="Paste one per line: SLS205582, Mohamad Imran"></textarea>
       <button class="btn secondary" id="aNamesBtn">Save names</button>
       <p style="margin-top:14px;"><button class="btn secondary" id="aDisconnectBtn">Disconnect this device</button></p>
+    </div>
+  </div>
+
+    <div class="card" id="aActConnect" style="display:none;">
+      <h3>Activity Overview</h3>
+      <p>See how often each Staff ID has opened The Compass, and roughly how many devices. This needs a GoatCounter API key, saved on this device only, the same way as the GitHub token above.</p>
+      <ol>
+        <li>Go to <b>sls-thecompass.goatcounter.com</b> and sign in.</li>
+        <li>Tap your account name (top right), then <b>API</b>.</li>
+        <li>Tap <b>New API key</b>, name it <b>Compass admin</b>, tick "Read statistics", and generate it.</li>
+        <li>Copy the key and paste it below.</li>
+      </ol>
+      <label for="aGcToken">Paste API key</label>
+      <input type="password" id="aGcToken" placeholder="a long random code" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <button class="btn" id="aGcConnectBtn">Save and connect</button>
+    </div>
+
+    <div class="card" id="aActivity" style="display:none;">
+      <h3>Activity Overview</h3>
+      <div class="msg" id="aActMsg"></div>
+      <div id="aActTable"></div>
+      <p style="margin-top:14px;"><button class="btn secondary" id="aGcRefreshBtn">Refresh</button> <button class="btn secondary" id="aGcDisconnectBtn">Disconnect this device</button></p>
     </div>
   </div>
 </div>
@@ -1600,7 +1631,111 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
   $('aDisconnectBtn').addEventListener('click', onDisconnect);
   $('aId').addEventListener('keydown', function (e) { if (e.key === 'Enter') onAdd(); });
 
-  window.__adminInit = function () { $('aLink').innerHTML = ''; msg(''); if (!getToken()) panels('connect'); else loadList(); };
+  // ---------- Activity Overview (GoatCounter) ----------
+  var GC_TOKEN_KEY = 'sls_admin_gc_token_v1';
+  var GC_BASE = 'https://sls-thecompass.goatcounter.com/api/v0';
+  function getGcToken() { try { return localStorage.getItem(GC_TOKEN_KEY) || ''; } catch (e) { return ''; } }
+  function setGcToken(t) { try { if (t) localStorage.setItem(GC_TOKEN_KEY, t); else localStorage.removeItem(GC_TOKEN_KEY); } catch (e) {} }
+  function actPanels(which) {
+    $('aActConnect').style.display = which === 'connect' ? 'block' : 'none';
+    $('aActivity').style.display = which === 'main' ? 'block' : 'none';
+  }
+  function actMsg(text, kind) { var m = $('aActMsg'); m.className = text ? 'msg ' + kind : 'msg'; m.textContent = text || ''; }
+
+  function gcFetch(path, params) {
+    var qs = Object.keys(params).map(function (k) {
+      var v = params[k];
+      if (Array.isArray(v)) return v.map(function (x) { return encodeURIComponent(k) + '=' + encodeURIComponent(x); }).join('&');
+      return encodeURIComponent(k) + '=' + encodeURIComponent(v);
+    }).join('&');
+    return fetch(GC_BASE + path + '?' + qs, { headers: { 'Authorization': 'Bearer ' + getGcToken() } })
+      .then(function (res) { return res.json().catch(function () { return null; }).then(function (data) { return { status: res.status, ok: res.ok, data: data }; }); });
+  }
+
+  function fetchAllHits() {
+    var start = '2025-01-01T00:00:00Z', end = new Date().toISOString(), all = [], exclude = [];
+    function page() {
+      return gcFetch('/stats/hits', { start: start, end: end, limit: 100, exclude_paths: exclude, path_by_name: true }).then(function (r) {
+        if (!r.ok) return r;
+        var hits = (r.data && r.data.hits) || [];
+        all = all.concat(hits);
+        if (r.data && r.data.more && hits.length) {
+          exclude = exclude.concat(hits.map(function (h) { return String(h.path_id); }));
+          return page();
+        }
+        return { ok: true, status: 200, data: { hits: all } };
+      });
+    }
+    return page();
+  }
+
+  function lastActiveDay(hit) {
+    var last = null;
+    (hit.stats || []).forEach(function (s) { if (s.daily && s.daily > 0 && (!last || s.day > last)) last = s.day; });
+    return last;
+  }
+
+  function loadActivity() {
+    if (!getGcToken()) return;
+    actMsg('Loading…', 'info');
+    fetchAllHits().then(function (r) {
+      if (r.status === 401) { setGcToken(''); actPanels('connect'); actMsg('GoatCounter did not accept that key. Please paste a new one.', 'err'); return; }
+      if (r.status === 403) { actMsg('This key cannot read statistics. Check it has "Read statistics" ticked, then reconnect.', 'err'); return; }
+      if (!r.ok) { actMsg('Could not load activity (error ' + r.status + ').', 'err'); return; }
+      var byId = {};
+      (r.data.hits || []).forEach(function (hit) {
+        var m = /^(home|concierge|book|admin)-([A-Za-z0-9]+)$/.exec(hit.path || '');
+        if (!m) return;
+        var kind = m[1], id = m[2].toUpperCase();
+        if (!byId[id]) byId[id] = { total: 0, last: null };
+        byId[id].total += hit.count || 0;
+        var la = lastActiveDay(hit);
+        if (la && (!byId[id].last || la > byId[id].last)) byId[id].last = la;
+      });
+      actMsg('', 'info');
+      renderActivity(byId);
+    }).catch(function () { actMsg('Could not reach GoatCounter. Check your connection and try again.', 'err'); });
+  }
+
+  function renderActivity(byId) {
+    var names = getNames();
+    var ids = (state.ids || []).slice();
+    if (ids.indexOf(MASTER) < 0) ids.unshift(MASTER);
+    var rows = ids.map(function (id) {
+      var a = byId[id] || { total: 0, last: null };
+      return { id: id, name: names[id] || '', total: a.total, last: a.last };
+    });
+    rows.sort(function (a, b) { return b.total - a.total; });
+    var html = '<div class="act-head"><span>Staff</span><span>Opens (approx. devices)</span></div>';
+    html += rows.map(function (r) {
+      var never = r.total === 0;
+      return '<div class="act-row' + (never ? ' never' : '') + '">' +
+        '<div class="who"><div class="id">' + esc(r.id) + (r.id === MASTER ? ' (you)' : '') + '</div>' + (r.name ? '<div class="nm">' + esc(r.name) + '</div>' : '') + '</div>' +
+        '<div class="nums">' + (never ? 'Never opened' : ('<span class="n">' + r.total + '</span> opens &middot; last ' + esc(r.last || 'unknown'))) + '</div>' +
+        '</div>';
+    }).join('');
+    $('aActTable').innerHTML = html;
+  }
+
+  $('aGcConnectBtn').addEventListener('click', function () {
+    var t = $('aGcToken').value.trim();
+    if (t.length < 10) { actMsg('That does not look like a valid API key.', 'err'); return; }
+    setGcToken(t); $('aGcToken').value = '';
+    actPanels('main');
+    loadActivity();
+  });
+  $('aGcRefreshBtn').addEventListener('click', loadActivity);
+  $('aGcDisconnectBtn').addEventListener('click', function () {
+    if (!window.confirm('Remove the GoatCounter key from this device?')) return;
+    setGcToken(''); actPanels('connect'); actMsg('', 'info');
+  });
+
+  window.__adminInit = function () {
+    $('aLink').innerHTML = ''; msg('');
+    var listPromise = getToken() ? loadList() : (panels('connect'), Promise.resolve());
+    if (!getGcToken()) { actPanels('connect'); }
+    else { actPanels('main'); listPromise.then(loadActivity); }
+  };
 })();
 
 </script>
