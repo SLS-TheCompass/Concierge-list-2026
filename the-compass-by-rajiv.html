@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-title" content="The Compass">
 <meta name="theme-color" content="#16332B">
 <meta name="robots" content="noindex, nofollow">
-<script src="//gc.zgo.at/count.js" data-goatcounter="https://sls-compass.goatcounter.com/count" async data-goatcounter-settings='{"no_onload": true}'></script>
+<script src="//gc.zgo.at/count.js" data-goatcounter="https://sls-thecompass.goatcounter.com/count" async data-goatcounter-settings='{"no_onload": true}'></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 :root {
@@ -48,6 +48,29 @@ body { margin:0; background:var(--cream); color:var(--ink); font-family:'Inter',
 .tile-meta { font-size:12.5px; font-weight:700; color:var(--brass); }
 .tile-go { font-size:13px; font-weight:700; color:var(--pine); white-space:nowrap; }
 .home-foot { text-align:center; font-size:12px; color:var(--ink-soft); padding:18px 20px 40px; margin:0; }
+.whatsnew { max-width:800px; margin:0 auto; padding:14px 20px 0; }
+.whatsnew-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; }
+.whatsnew-title { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:18px; color:var(--pine); margin:0; }
+.whatsnew-close { background:var(--pine); color:var(--cream); border:none; border-radius:7px; padding:6px 12px; font-size:12px; font-weight:600; cursor:pointer; font-family:'Inter',sans-serif; }
+.whatsnew-list { list-style:none; margin:0; padding:0; background:var(--paper); border:1px solid var(--brass-light); border-left:4px solid var(--brass); border-radius:10px; overflow:hidden; }
+.whatsnew-list li { padding:10px 14px; font-size:13px; line-height:1.5; color:var(--ink); border-top:1px solid var(--line); }
+.whatsnew-list li:first-child { border-top:none; }
+.whatsnew-list .wn-date { color:var(--brass); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:.03em; display:block; margin-bottom:2px; }
+.login-wrap { display:flex; align-items:center; justify-content:center; min-height:100vh; padding:24px; background:#16332B; font-family:'Inter',sans-serif; }
+.login-card { background:#FFFFFF; border-radius:14px; padding:36px 28px; max-width:340px; width:100%; text-align:center; }
+.login-card svg { width:44px; height:44px; margin-bottom:6px; }
+.login-title { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:22px; color:#16332B; margin:0 0 6px 0; }
+.login-sub { font-size:13px; color:#6B675E; line-height:1.5; margin:0 0 18px 0; }
+.login-input { width:100%; padding:13px; border:1.5px solid #E4DFD3; border-radius:9px; font-size:16px; text-align:center; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px; font-family:'Inter',sans-serif; color:#2A2A26; }
+.login-input:focus { outline:none; border-color:#A9812E; }
+.login-btn { width:100%; background:#16332B; color:#FBF8F2; border:none; border-radius:9px; padding:13px; font-size:15px; font-weight:600; cursor:pointer; font-family:'Inter',sans-serif; }
+.login-btn:disabled { opacity:.6; cursor:default; }
+.login-msg { font-size:13px; line-height:1.5; margin:0 0 14px 0; padding:10px 12px; border-radius:8px; text-align:left; }
+.login-msg.err { background:#FBE4E1; color:#A6342A; }
+.login-msg.info { background:#F1EAD8; color:#6B5B2E; }
+.login-foot { font-size:12px; color:#6B675E; margin-top:16px; }
+
+
 
 html.checking .view, html.checking .staff-notice { display:none !important; }
 #splash { display:none; min-height:100vh; align-items:center; justify-content:center; flex-direction:column; background:var(--pine); color:var(--brass-light); font-family:'Cormorant Garamond',serif; font-size:20px; gap:14px; }
@@ -537,8 +560,17 @@ html.checking #splash { display:flex; }
       "SLS086975","SLS168781","SLS205300","SLS206538"
     ];
     window.__MASTER_ID__ = MASTER_ID;
-    var staffId = new URLSearchParams(window.location.search).get('u');
+    window.__ID_KEY__ = 'sls_staff_id_v1';
+
+    // Older personal links (?u=STAFFID) still work and log this device in automatically.
+    // New visitors with no link at all will be asked to log in with their Staff ID instead.
+    var urlId = new URLSearchParams(window.location.search).get('u');
+    var storedId = null;
+    try { storedId = localStorage.getItem(window.__ID_KEY__); } catch (e) {}
+
+    var staffId = urlId || storedId || null;
     window.__STAFF_ID__ = staffId;
+    window.__ID_SOURCE__ = urlId ? 'url' : (storedId ? 'storage' : 'none');
     window.__IS_MASTER__ = !!staffId && staffId === MASTER_ID;
     document.documentElement.classList.add('checking');
   })();
@@ -547,7 +579,17 @@ html.checking #splash { display:flex; }
 
 <div class="staff-notice">⚠️ For internal staff use only — to send a guest a recommendation, use the <strong>Share</strong> or <strong>QR</strong> button on that venue. Never forward this page or link.</div>
 
+<div class="whatsnew" id="whatsNew" style="display:none;">
+  <div class="whatsnew-head">
+    <p class="whatsnew-title">What's New</p>
+    <button class="whatsnew-close" id="whatsNewClose">Got it</button>
+  </div>
+  <ul class="whatsnew-list" id="whatsNewList"></ul>
+</div>
+
 <div id="splash"><svg viewBox='0 0 100 100' aria-hidden='true'><circle cx='50' cy='50' r='40' fill='none' stroke='#C9A24D' stroke-width='3'/><path d='M50 22 L60 50 L50 78 L40 50 Z' fill='#C9A24D'/><circle cx='50' cy='50' r='5' fill='#FBF8F2'/></svg><div>Checking access…</div></div>
+
+<div id="loginScreen" style="display:none;"></div>
 
 <div class="view active" id="view-home">
   <div class="home-hero"><svg viewBox='0 0 100 100' aria-hidden='true'><circle cx='50' cy='50' r='40' fill='none' stroke='#C9A24D' stroke-width='3'/><path d='M50 22 L60 50 L50 78 L40 50 Z' fill='#C9A24D'/><circle cx='50' cy='50' r='5' fill='#FBF8F2'/></svg>
@@ -571,7 +613,7 @@ html.checking #splash { display:flex; }
       <div class="tile-foot"><span class="tile-meta">Master only</span><span class="tile-go">Open →</span></div>
     </div>
   </div>
-  <p class="home-foot">Prepared by Rajiv Sharma, Assistant Chef Concierge</p>
+  <p class="home-foot">Prepared by Rajiv Sharma, Assistant Chef Concierge<br><span id="homeIdLine"></span> &middot; <a href="#" id="switchAccountLink" style="color:var(--pine);font-weight:600;">Not you? Switch account</a></p>
 </div>
 
 <div class="view app-conc" id="view-concierge">
@@ -824,16 +866,16 @@ const DATA = [
   { section: "Family & Kids", category: "Free / Low-Cost", name: "Haw Par Villa", contact: "262 Pasir Panjang Rd", phone: "+65 6872 2780", website: "hawparvilla.sg", hours: "PARTIALLY CLOSED since 8 Dec 2025 for maintenance (until further notice, per STB) -- but Hell's Museum, incl. the Ten Courts of Hell, REMAINS OPEN, daily 9am-10pm", notes: "Wonderfully strange diorama park depicting Chinese mythology. Free entry to outdoor grounds; Hell's Museum has a separate admission fee.", michelin: "-" },
   { section: "Family & Kids", category: "Free / Low-Cost", name: "Sembawang Hot Spring Park", contact: "Gambas Ave", phone: "", website: "nparks.gov.sg/visit/parks/park-detail/sembawang-hot-spring-park", hours: "Daily 7am-7pm (cascading foot bath pool closed Mon & Thu 11am-2pm for maintenance)", notes: "Free entry. Singapore's only natural hot spring park. Dip feet or boil an egg in the designated pool; bring your own bucket/pail.", michelin: "-" },
   { section: "Family & Kids", category: "Free / Low-Cost", name: "MacRitchie TreeTop Walk", contact: "MacRitchie Nature Reserve (approx. 4.5km walk-in from MacRitchie Reservoir Park, or 2.5km from Windsor Nature Park)", phone: "", website: "nparks.gov.sg/visit/parks/park-detail/central-catchment-nature-reserve", hours: "Weekdays 9am-5pm; Weekends & PH 8:30am-5pm", notes: "Free entry. 250m suspension bridge through forest canopy, 30m above ground. Visit on weekdays or 10:30am-3:30pm off-peak to avoid queues.", michelin: "-" },
-  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Kampong Buangkok", contact: "Kampong Buangkok", phone: "", website: "", hours: "Anytime", notes: "Singapore's last surviving kampong (village); genuine time capsule 20 minutes from the city", michelin: "-" },
-  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Fort Canning Tree Tunnel", contact: "Fort Canning Park", phone: "", website: "", hours: "Anytime", notes: "Photogenic tree-root staircase in the Civic District", michelin: "-" },
-  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Pulau Ubin", contact: "Offshore island (bumboat from Changi Point)", phone: "", website: "", hours: "Bumboat operating hours", notes: "Rustic offshore island frozen in 1960s kampong life", michelin: "-" },
-  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Tiong Bahru Bird Corner", contact: "Tiong Bahru", phone: "", website: "", hours: "Early mornings", notes: "Old-school community songbird gathering", michelin: "-" },
-  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Henderson Waves & Southern Ridges", contact: "Telok Blangah", phone: "", website: "", hours: "Anytime", notes: "Singapore's highest pedestrian bridge", michelin: "-" },
+  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Kampong Buangkok", contact: "Kampong Buangkok, off Gerald Drive, near Buangkok MRT", phone: "", website: "", hours: "Anytime", notes: "Singapore's last surviving kampong (village); genuine time capsule 20 minutes from the city. This is a private residential area with real residents - visit respectfully and keep noise down.", michelin: "-" },
+  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Fort Canning Tree Tunnel", contact: "Fort Canning Park (drainage tunnel entrance off Penang Road, at the Fort Canning Park boundary)", phone: "N.A. (the tunnel itself is an LTA structure, not an NParks facility; Fort Canning Park's own line is +65 6332 1200)", website: "https://www.nparks.gov.sg/visit/parks/fort-canning-park", hours: "Fort Canning Park is open 24 hours; the tree tunnel itself has no separate gate or hours.", notes: "Photogenic tree-root staircase in the Civic District", michelin: "-" },
+  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Pulau Ubin", contact: "Offshore island (bumboat from Changi Point)", phone: "+65 6542 4108 (Pulau Ubin Management Office)", website: "https://pulau-ubin.nparks.gov.sg/", hours: "Island accessible via bumboat from Changi Point Ferry Terminal, roughly 6am-10pm depending on demand (no fixed schedule - boats leave once full). Ubin Volunteer Hub 9am-5pm; Chek Jawa Wetlands 9am-5pm.", notes: "Rustic offshore island frozen in 1960s kampong life", michelin: "-" },
+  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Tiong Bahru Bird Corner", contact: "Junction of Seng Poh Road and Tiong Bahru Road, opposite Link Hotel (mural also nearby at 71 Seng Poh Lane)", phone: "", website: "https://www.roots.gov.sg/places/places-landing/Places/landmarks/tiong-bahru-heritage-trail/bird-corner-former-hu-lu-temple", hours: "Early mornings", notes: "Old-school community songbird gathering", michelin: "-" },
+  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Henderson Waves & Southern Ridges", contact: "Telok Blangah Hill Park (bridge connects Mount Faber Park and Telok Blangah Hill Park)", phone: "+65 1800 471 7300 (NParks helpline)", website: "https://www.nparks.gov.sg/visit/parks/telok-blangah-hill-park/special-features", hours: "Park open 24 hours. Bridge lit up nightly 7pm-2am.", notes: "Singapore's highest pedestrian bridge", michelin: "-" },
   { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Alkaff Mansion", contact: "10 Telok Blangah Green, Telok Blangah Hill Park", phone: "+65 8126 8844", website: "https://thealkaffmansion.sg/", hours: "Grounds: Sun & Tue-Thu 8am-11pm; Fri-Sat 8am-12am; Mon 8am-5pm. Individual outlet hours (Wildseed Café, 1918 Heritage Bar, UNA) may vary slightly within these times.", notes: "Restored 1920s colonial mansion; special-occasion meal setting. Currently home to three concepts under The Alkaff Mansion (1-Group): Wildseed Café, 1918 Heritage Bar, and UNA (refined Spanish restaurant).", michelin: "-" },
-  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Sri Mariamman Temple", contact: "244 South Bridge Rd", phone: "", website: "", hours: "Free entry", notes: "Singapore's oldest Hindu temple; intricately sculpted gopuram tower", michelin: "-" },
-  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Emerald Hill Road", contact: "Emerald Hill Rd", phone: "", website: "", hours: "Anytime", notes: "Preserved Peranakan shophouses off Orchard Road", michelin: "-" },
-  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Kim Tian Road Void Deck Murals", contact: "Kim Tian Rd, Tiong Bahru", phone: "", website: "", hours: "Anytime", notes: "Hand-painted murals under an HDB block; free, unmarked", michelin: "-" },
-  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "195 Pearl's Hill Terrace", contact: "195 Pearl's Hill Terrace", phone: "", website: "", hours: "Outdoor public space, accessible anytime; individual galleries/studios keep their own hours", notes: "Free entry to the grounds. Former colonial police barracks, now an indie arts enclave with a graffiti-walled courtyard.", michelin: "-" },
+  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Sri Mariamman Temple", contact: "244 South Bridge Rd", phone: "+65 6296 3469 (Hindu Endowments Board, which manages the temple)", website: "https://heb.org.sg/smt/", hours: "Daily 7am-12pm, 6-9pm. Free entry; modest dress required, remove footwear before entering.", notes: "Singapore's oldest Hindu temple; intricately sculpted gopuram tower", michelin: "-" },
+  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Emerald Hill Road", contact: "Emerald Hill Road, off Orchard Road (beside Centrepoint)", phone: "N.A. (a conserved heritage street managed by URA, not a single bookable site)", website: "https://www.ura.gov.sg/Corporate/Get-Involved/Conserve-Built-Heritage/Emerald-Hill", hours: "Anytime", notes: "Preserved Peranakan shophouses off Orchard Road", michelin: "-" },
+  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "Kim Tian Road Void Deck Murals", contact: "Block 1, Kim Tian Road, Tiong Bahru (void deck)", phone: "", website: "", hours: "Anytime", notes: "Hand-painted murals under an HDB block; free, unmarked", michelin: "-" },
+  { section: "Hidden Gem", category: "Offbeat & Photogenic", name: "195 Pearl's Hill Terrace", contact: "195 Pearl's Hill Terrace", phone: "", website: "https://www.instagram.com/195pearlshillterrace/", hours: "Outdoor public space, accessible anytime; individual galleries/studios keep their own hours", notes: "Free entry to the grounds. Former colonial police barracks, now an indie arts enclave with a graffiti-walled courtyard.", michelin: "-" },
   { section: "Restaurant", category: "French Contemporary", name: "Odette", contact: "National Gallery Singapore, #01-04, 1 St Andrew's Road, S178957", phone: "+65 6385 0498", website: "https://www.odetterestaurant.com/", hours: "Lunch Tue-Sat 12-1:15pm (last seating); Dinner Mon-Sat 6:30-8:15pm (last seating). Closed Sun.", notes: "Chef Julien Royer, The Lo & Behold Group. Contemporary French cuisine built around boutique, seasonal produce; named after Chef Royer's grandmother. Three Michelin Stars.", michelin: "Three Star" },
   { section: "Restaurant", category: "European Contemporary", name: "Zén", contact: "41 Bukit Pasoh Road, S089855", phone: "+65 6534 8880", website: "https://www.restaurantzen.com/", hours: "Reservation-only fine dining; no fixed walk-in hours published. Contact restaurant directly to book.", notes: "Sister restaurant to Frantzén in Stockholm. Nordic-Japanese-French tasting menu across a restored pre-war shophouse. Three Michelin Stars.", michelin: "Three Star" },
   { section: "Restaurant", category: "French Contemporary", name: "1887 by André", contact: "Raffles Hotel, Lobby Level (former Raffles Grill room), 1 Beach Road, S189673", phone: "+65 6412 1816", website: "https://www.1887byandre.com/", hours: "Tue-Sat: lunch seating 11:30am-1pm, dinner seating 6-8pm. Reservations open 60 days in advance. Guests aged 12+ welcome.", notes: "NEW for 2026, debuting directly with Two Michelin Stars and winning MICHELIN's Opening of the Year Award. Chef André Chiang presents French classics reworked through a Singapore lens.", michelin: "Two Star" },
@@ -890,7 +932,22 @@ const DATA = [
   { section: "Restaurant", category: "Indian", name: "Lagnaa Barefoot Dining", contact: "6 Upper Dickson Road, S207466", phone: "+65 6296 1215 / +65 9784 4771 (WhatsApp)", website: "https://www.lagnaa.com/", hours: "Tue-Sun 11:30am-11:30pm. Closed Mon.", notes: "Unique 'barefoot dining' concept in Little India by Chef-Owner Kaesavan (K7) — diners can sit on the floor upstairs or use regular seating downstairs. Known for its spicy Chilli Challenge and Arusuvai curry experience. One of 17 Bib Gourmand establishments in every Singapore edition since 2016.", michelin: "Bib Gourmand" },
   { section: "Restaurant", category: "Seafood", name: "Sin Huat Eating House", contact: "659/661 Lorong 35 Geylang, S389589", phone: "+65 6744 9755", website: "", hours: "Daily 6:30pm-12am (some sources note extended to 1am).", notes: "No printed menu — owner-chef Danny Lee takes orders verbally. Signature crab bee hoon, credited as its inventor; a favourite of Anthony Bourdain, who featured it on his show. One of 17 Bib Gourmand establishments in every Singapore edition since 2016. Not halal-certified.", michelin: "Bib Gourmand" },
   { section: "Restaurant", category: "Thai", name: "Yhingthai Palace", contact: "36 Purvis Street, #01-04, S188613", phone: "+65 6337 1161 / +65 6337 9429", website: "https://yhingthai.com.sg/", hours: "Daily 11:30am-2pm, 6-10pm.", notes: "Long-standing, family-friendly Thai restaurant near City Hall/Bugis. Known for authentic curries and Thai desserts like mango sticky rice. One of 17 Bib Gourmand establishments in every Singapore edition since 2016.", michelin: "Bib Gourmand" },
-  { section: "Restaurant", category: "Malay/Nasi Lemak", name: "The Coconut Club (Beach Road)", contact: "269 Beach Road, S199546", phone: "+65 8725 3315", website: "https://www.thecoconutclub.sg/beach-road", hours: "Tue-Fri 11am-10:30pm; Sat-Sun 11am-10:30pm (some sources note 8:30am weekend start). Closed Mon.", notes: "Flagship of the acclaimed nasi lemak brand, now under The Lo & Behold Group (also behind Odette). Signature 'White Sutera' coconut milk-infused rice, ayam goreng berempah, charcoal-grilled barramundi otah. Restored heritage shophouse setting in Kampong Gelam.", michelin: "Bib Gourmand" }
+  { section: "Restaurant", category: "Malay/Nasi Lemak", name: "The Coconut Club (Beach Road)", contact: "269 Beach Road, S199546", phone: "+65 8725 3315", website: "https://www.thecoconutclub.sg/beach-road", hours: "Tue-Fri 11am-10:30pm; Sat-Sun 11am-10:30pm (some sources note 8:30am weekend start). Closed Mon.", notes: "Flagship of the acclaimed nasi lemak brand, now under The Lo & Behold Group (also behind Odette). Signature 'White Sutera' coconut milk-infused rice, ayam goreng berempah, charcoal-grilled barramundi otah. Restored heritage shophouse setting in Kampong Gelam.", michelin: "Bib Gourmand" },
+  { section: "In-House", category: "National Gallery Singapore", name: "Milli: Sky Dining, Bar & Lounge", contact: "1 St Andrew's Road, #05-02/#06-01, National Gallery Singapore", phone: "", website: "", hours: "Confirm exact hours (rooftop restaurant and club lounge)", notes: "Two-storey rooftop restaurant on the former Smoke & Mirrors site. Chef LG Han of Michelin-starred Labyrinth with Vijay Mudaliar of Native, and the team behind nightlife concept Bae's Cocktail Club. Signature: spring chicken rice paella; king crab with white pepper and salted egg yolk sauce. Best for couples, business travellers, skyline views.", michelin: "-" },
+  { section: "Restaurant", category: "Japanese - Casual", name: "Hikiniku to Come", contact: "VivoCity (confirm exact unit)", phone: "", website: "", hours: "Confirm exact hours", notes: "Tokyo charcoal-grilled hamburg steak chain, Singapore debut. Single set meal of three 90g patties, ground fresh in-store and grilled over binchotan charcoal, served one at a time. Set meal from S$27.90++. Expect queues; best for an early lunch before the noon rush.", michelin: "-" },
+  { section: "Restaurant", category: "Korean", name: "Bibim Deli", contact: "Confirm exact address", phone: "", website: "", hours: "Confirm exact hours", notes: "DIY Korean rice bowl concept by Culinary Class Wars chef Yohan Kim. More than 20 rotating banchan and sauces mixed onto a free base bowl of rice. Good value for a quick, casual lunch between meetings.", michelin: "-" },
+  { section: "Restaurant", category: "Japanese - Hot Pot", name: "Sukiyaki Jin", contact: "Orchard (confirm exact address)", phone: "", website: "", hours: "Confirm exact hours", notes: "Singapore's first A5 wagyu tomato sukiyaki, putting a tomato-based twist on the traditional hot pot. A distinctive dinner pick for guests who already know the more familiar sukiyaki spots.", michelin: "-" },
+  { section: "Restaurant", category: "Cafe", name: "Tiffany & Co. Blue Box Cafe", contact: "ION Orchard, top floor of the Tiffany flagship store", phone: "", website: "", hours: "Confirm exact hours", notes: "Tiffany's first cafe concept in Southeast Asia. Menu developed with Julien Royer of three-Michelin-starred Odette; American cafe classics with French polish and Singapore touches. Tables go fast; advise guests to book as early as reservations open.", michelin: "-" },
+  { section: "Bar", category: "Cocktail Bar", name: "Singapore Martini Club", contact: "Orchard Rendezvous Hotel, 1 Tanglin Road, S247905", phone: "+65 8185 1684", website: "https://www.thesingaporemartiniclub.sg/", hours: "Tue-Sat 6pm-2am. Closed Sun-Mon.", notes: "Vintage luxury train-carriage theme by Master Bartender Dario Knox (The Backdrop). Over 50 martinis, alcoholic and zero-proof, organised into 'stops' from fruity to spirit-forward. Signature: Tokyo Spice Martini; Sub-Zero Dirty Martini served tableside at around -10°C. Bookings of 8+ or events: events@thesingaporemartiniclub.sg", michelin: "-" },
+  { section: "Restaurant", category: "Singapore Heritage", name: "Tembusu", contact: "1 Cluny Road, Ginger Garden, Singapore Botanic Gardens", phone: "", website: "", hours: "Daily 8am-9pm (main menu).", notes: "'Borderless Straits' dining concept from Fleursophy Group founder Nicole Chen, inside the UNESCO-listed Botanic Gardens. Named for the native Tembusu tree on the Singapore five-dollar note; the Gardens' own Tembusu specimen is over 200 years old. Menu draws on cuisines across the Straits of Malacca. Soft-opened 3 August 2026, official launch 3 September 2026. Best for combining a Gardens visit with a proper meal.", michelin: "-" },
+  { section: "Restaurant", category: "Street Food (Hawker)", name: "Tian Tian Chicken Rice (Jewel Changi Airport)", contact: "Jewel Changi Airport, Basement, next to Food Republic", phone: "", website: "", hours: "Confirm exact hours", notes: "New outlet of the Maxwell Food Centre original (founded 1986 by Madam Foo Kui Lian), Bib Gourmand every year since 2016. Nearly 100 seats in the basement of Jewel Changi. Signature: Chicken Rice Set ($11++); Madam Foo's Steamed Chicken Curry ($13.80++, rare outside the original stall). Genuinely useful for layover guests or those departing early - one of the few ways to try a famous hawker name without a trip into town.", michelin: "-" },
+  { section: "Restaurant", category: "Korean Fried Chicken", name: "Mom's Touch", contact: "81 South Bridge Road, Boat Quay", phone: "", website: "", hours: "Confirm exact hours", notes: "One of South Korea's largest fried chicken chains (1,400+ outlets), returned to Singapore after leaving in 2022, in a Boat Quay shophouse. Collaboration with girl group LE SSERAFIM on three Singapore-exclusive burgers. Signature: SuperThigh Chicken Burger ($9.95); Boneless Fried Chicken Thigh ($12.95). Fun, casual pick for a Boat Quay dinner with drinks by the river.", michelin: "-" },
+  { section: "Restaurant", category: "Spanish", name: "Sabòr", contact: "30 Victoria Street, #01-33, CHIJMES, S187996", phone: "+65 9611 9127", website: "https://www.saborchijmes.com/", hours: "Mon-Thu 4:30pm-12am; Fri-Sun 12-2pm, 4:30pm-12am.", notes: "Spanish bodega-style concept at CHIJMES, from the team behind Duomo Ristorante, in the former Privé space. 100-seat glass-enclosed dining room plus alfresco courtyard. Comfort-food tapas and sharing plates rather than fine-dining small plates; happy hour daily 4:30-6:30pm. Good alternative for guests who've done the CBD wine-bar circuit already. Note: the Compass edition text lists this as Boon Tat Street - the correct address is CHIJMES.", michelin: "-" },
+  { section: "Restaurant", category: "Mediterranean", name: "NOOR Singapore", contact: "17 Mohamed Sultan Road, S238966", phone: "+65 8805 8075", website: "https://www.noor.sg/", hours: "Tue-Sun 5pm-12am. Closed Mon.", notes: "Mediterranean x Japanese kitchen and bar from chef-owner Titus Thamil. 65 seats plus a 10-seat izakaya at the back. Mediterranean cooking (tahini, labneh, harissa) with Japanese touches worked into the same plates (miso in hummus, yuzu in labneh). Not halal-certified. A distinctive alternative for guests who feel they've exhausted Singapore's Mediterranean and Japanese options separately.", michelin: "-" },
+  { section: "Restaurant", category: "Japanese - Seafood", name: "Mukai", contact: "Plaza Singapura, #B1-07, 68 Orchard Road, S238839", phone: "", website: "https://www.instagram.com/kaisendokoro_mukai/", hours: "Daily 11:30am-3pm, 5:30-10pm.", notes: "Tokyo's cult-favourite Shibuya kaisendon specialist, first overseas outlet. Tall, piled 'Kaiho Don' seafood rice bowls, fish flown in from Japan; eat the sashimi cold first, then pour warm dashi over the rice for ochazuke. Bowls $19.90-$79.90; set meals $68-$99++. Not halal-certified. Strong pick for a fast, high-quality lunch while shopping - no reservation culture, just quality seafood done quickly.", michelin: "-" },
+  { section: "Restaurant", category: "Korean - Tonkatsu", name: "Katsu by Kyu", contact: "6A Shenton Way, #01-09, OUE Downtown Gallery, S068815", phone: "", website: "", hours: "Mon-Sat: Lunch 11am-3pm; Dinner 5-10pm. Closed Sun.", notes: "Singapore's first tonkatsu specialist built exclusively around Jeju pork, in a hanok-inspired 44-seat interior. Cutlets dry-aged 10 days, finished over rice-straw charcoal, with rice milled fresh daily. The Korean take on tonkatsu rather than the more familiar Japanese version. Worth mentioning to guests who've already tried Japanese tonkatsu and are curious about the difference.", michelin: "-" },
+  { section: "Restaurant", category: "Chinese Vegetarian", name: "LingZhi Greens", contact: "390 Orchard Road, #B1-04/05, Palais Renaissance, S238871 (relocated from Liat Towers)", phone: "", website: "", hours: "Daily: Lunch 11am-3pm (LO 2:30pm); Dinner 6-10pm (LO 9:30pm).", notes: "Chinese vegetarian institution since 1991, relocated to Palais Renaissance on 10 August 2026 with a refreshed, whole-foods-focused menu. Same philosophy across the move: quality vegetables, mushrooms, seasonal produce and organic ingredients through refined Chinese cooking technique. Dependable option for guests with dietary restrictions wanting something more considered than a generic salad bar.", michelin: "-" },
+  { section: "Restaurant", category: "Singaporean", name: "Rempapa", contact: "National Gallery Singapore, Level 1, Supreme Court Wing, 1 St Andrew's Road, S178957", phone: "+65 9459 1603", website: "https://www.nationalgallery.sg/sg/en/visit/dine-shop/rempapa.html", hours: "Daily 10am-7pm.", notes: "Singapore Heritage Cuisine restaurant at the National Gallery, celebrating Malay and Peranakan cooking through a fine-dining lens. Overdue a mention for guests asking about heritage dining near the Civic District - natural pairing with a Gallery visit or the Singapore History Gallery. 15% off for Insiders.", michelin: "-" }
 ];
 
 const SECTIONS = ["All", "In-House", "Sister Property", "Restaurant", "Bar", "Family & Kids", "Shopping", "Hidden Gem", "Near Hotel", "Michelin", "Bib Gourmand"];
@@ -1554,26 +1611,22 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
   var FOURTEEN_DAYS = 14 * 24 * 60 * 60 * 1000;
 
   function blockPage(reason) {
-    var offline = reason === 'offline';
-    var title = offline ? 'Could Not Check Access' : 'Access Not Available';
-    var text = offline
-      ? 'We could not check your access just now. Please check your internet connection and try again.'
-      : 'This link is not recognized as an active staff link. Please contact Rajiv Sharma, Assistant Chef Concierge, for your personal access link.';
     document.body.innerHTML =
       '<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;background:#16332B;">' +
       '<div style="background:#FFFFFF;border-radius:14px;padding:36px 28px;max-width:340px;text-align:center;font-family:Inter,sans-serif;">' +
-      '<p style="font-family:\'Cormorant Garamond\',serif;font-weight:700;font-size:22px;color:#16332B;margin:0 0 10px 0;">' + title + '</p>' +
-      '<p style="font-size:14px;color:#6B675E;line-height:1.5;margin:0;">' + text + '</p>' +
-      (offline ? '<button onclick="location.reload()" style="margin-top:18px;background:#16332B;color:#FBF8F2;border:none;border-radius:8px;padding:11px 20px;font-size:14px;font-weight:600;cursor:pointer;">Try again</button>' : '') +
+      '<p style="font-family:\'Cormorant Garamond\',serif;font-weight:700;font-size:22px;color:#16332B;margin:0 0 10px 0;">Could Not Check Access</p>' +
+      '<p style="font-size:14px;color:#6B675E;line-height:1.5;margin:0;">We could not check your access just now. Please check your internet connection and try again.</p>' +
+      '<button onclick="location.reload()" style="margin-top:18px;background:#16332B;color:#FBF8F2;border:none;border-radius:8px;padding:11px 20px;font-size:14px;font-weight:600;cursor:pointer;">Try again</button>' +
       '</div></div>';
     html.classList.remove('checking');
   }
 
-  // Reads the live list (staff.json). Master always passes.
-  function checkAccess() {
-    var id = window.__STAFF_ID__;
+  // Checks a Staff ID against the live list (staff.json). Master always passes.
+  // Pass an id explicitly (e.g. from the login form); otherwise checks window.__STAFF_ID__.
+  function checkAccess(idToCheck) {
+    var id = idToCheck || window.__STAFF_ID__;
     if (!id) return Promise.resolve({ ok: false, reason: 'unknown' });
-    if (window.__IS_MASTER__) return Promise.resolve({ ok: true });
+    if (id === window.__MASTER_ID__) return Promise.resolve({ ok: true });
     var ctl = ('AbortController' in window) ? new AbortController() : null;
     var timer = ctl ? setTimeout(function () { ctl.abort(); }, 7000) : null;
     var url = new URL('staff.json', location.href).href + '?t=' + Date.now();
@@ -1600,8 +1653,78 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
       });
   }
 
+  // ---------- Login screen (used for a shared link, or when a saved/linked ID is no longer valid) ----------
+  // This only ever touches #loginScreen and #splash - the rest of the page (the actual app)
+  // stays intact underneath, hidden by CSS, so a successful login can reveal it via start()
+  // without needing to rebuild anything.
+  function showLogin(message, isError) {
+    var splash = document.getElementById('splash');
+    if (splash) splash.style.display = 'none';
+    var box = document.getElementById('loginScreen');
+    box.className = 'login-wrap';
+    box.style.display = 'flex';
+    box.innerHTML =
+      '<div class="login-card">' +
+      '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="none" stroke="#A9812E" stroke-width="4"/><path d="M50 22 L60 50 L50 78 L40 50 Z" fill="#A9812E"/><circle cx="50" cy="50" r="5" fill="#FBF8F2"/></svg>' +
+      '<p class="login-title">The Compass</p>' +
+      '<p class="login-sub">Enter your Staff ID to continue.</p>' +
+      (message ? '<p class="login-msg ' + (isError ? 'err' : 'info') + '">' + message + '</p>' : '') +
+      '<input type="text" id="loginInput" class="login-input" placeholder="SLS205582" autocomplete="off" autocapitalize="characters" spellcheck="false" inputmode="text">' +
+      '<button id="loginBtn" class="login-btn">Continue</button>' +
+      '<p class="login-foot">This device will remember you after your first login. Not on the list? Contact Rajiv Sharma, Assistant Chef Concierge.</p>' +
+      '</div>';
+    var input = document.getElementById('loginInput'), btn = document.getElementById('loginBtn');
+    input.focus();
+    function submit() {
+      var id = input.value.trim().toUpperCase();
+      if (!/^SLS\d{6}$/.test(id)) { showLogin('A Staff ID looks like SLS205582: the letters SLS followed by 6 digits.', true); return; }
+      btn.disabled = true; btn.textContent = 'Checking…';
+      checkAccess(id).then(function (r) {
+        if (r.ok) {
+          try { localStorage.setItem(window.__ID_KEY__, id); } catch (e) {}
+          window.__STAFF_ID__ = id;
+          window.__IS_MASTER__ = (id === window.__MASTER_ID__);
+          box.style.display = 'none';
+          start();
+        } else if (r.reason === 'offline') {
+          showLogin('Could not check that Staff ID just now. Please check your connection and try again.', true);
+        } else {
+          showLogin('That Staff ID is not on the approved list. Please check it and try again, or contact Rajiv Sharma, Assistant Chef Concierge.', true);
+        }
+      });
+    }
+    btn.addEventListener('click', submit);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') submit(); });
+  }
+
+  // ---------- What's New ----------
+  // Add one line here each time new content is published. Never remove old lines,
+  // or people who haven't opened the app in a while will wrongly see them as new again.
+  var CHANGELOG = [
+    { id: 1, date: '30 Sep 2026', text: 'Hidden Gems: added phone and website details where available (Pulau Ubin, Sri Mariamman Temple, Fort Canning, Henderson Waves and others).' },
+    { id: 2, date: '30 Sep 2026', text: '15 new restaurants and bars added from past Compass editions, including Sab\u00f2r, NOOR Singapore, Rempapa and Singapore Martini Club.' }
+  ];
+  var WN_KEY = 'sls_whatsnew_seen_v1';
+  function showWhatsNew() {
+    var seen = 0;
+    try { seen = parseInt(localStorage.getItem(WN_KEY) || '0', 10) || 0; } catch (e) {}
+    var unseen = CHANGELOG.filter(function (e) { return e.id > seen; });
+    if (!unseen.length) return;
+    document.getElementById('whatsNewList').innerHTML = unseen.map(function (e) {
+      return '<li><span class="wn-date">' + e.date + '</span>' + e.text + '</li>';
+    }).join('');
+    document.getElementById('whatsNew').style.display = 'block';
+  }
+  document.getElementById('whatsNewClose').addEventListener('click', function () {
+    var maxId = Math.max.apply(null, CHANGELOG.map(function (e) { return e.id; }));
+    try { localStorage.setItem(WN_KEY, String(maxId)); } catch (e) {}
+    document.getElementById('whatsNew').style.display = 'none';
+  });
+
   function start() {
     html.classList.remove('checking');
+    var ls = document.getElementById('loginScreen'); if (ls) ls.style.display = 'none';
+    showWhatsNew();
     var views = { home: document.getElementById('view-home'), concierge: document.getElementById('view-concierge'), book: document.getElementById('view-book'), admin: document.getElementById('view-admin') };
     var titles = { home: 'The Compass', concierge: 'Concierge Quick Reference', book: 'The Compass Book', admin: 'Staff Access' };
     var current = null;
@@ -1628,6 +1751,13 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
     document.getElementById('tileConcierge').addEventListener('click', function () { location.hash = 'concierge'; });
     document.getElementById('tileBook').addEventListener('click', function () { location.hash = 'book'; });
     document.getElementById('tileAdmin').addEventListener('click', function () { location.hash = 'admin'; });
+    document.getElementById('homeIdLine').textContent = 'Logged in as ' + window.__STAFF_ID__;
+    document.getElementById('switchAccountLink').addEventListener('click', function (e) {
+      e.preventDefault();
+      if (!window.confirm('Switch to a different Staff ID on this device?')) return;
+      try { localStorage.removeItem(window.__ID_KEY__); } catch (err) {}
+      location.href = location.pathname; // drop any ?u= and #hash so the login screen shows fresh
+    });
     if (window.__IS_MASTER__) document.getElementById('tileAdmin').style.display = 'block';
     document.getElementById('tileConciergeMeta').textContent = window.__concCount + ' places';
     var info = window.__bookInfo;
@@ -1636,7 +1766,23 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
     route();
   }
 
-  checkAccess().then(function (r) { if (r.ok) start(); else blockPage(r.reason); });
+  checkAccess().then(function (r) {
+    if (r.ok) {
+      // A link with ?u= worked: remember this device so future visits (and the shared
+      // link/QR without any ID) go straight to the login screen only once, not every time.
+      if (window.__ID_SOURCE__ === 'url') { try { localStorage.setItem(window.__ID_KEY__, window.__STAFF_ID__); } catch (e) {} }
+      start();
+    } else if (r.reason === 'offline') {
+      blockPage('offline');
+    } else if (window.__STAFF_ID__) {
+      // A specific ID was supplied (from an old link or a saved login) but is not approved.
+      if (window.__ID_SOURCE__ === 'storage') { try { localStorage.removeItem(window.__ID_KEY__); } catch (e) {} }
+      showLogin('That Staff ID is not recognized. Please log in again, or contact Rajiv Sharma, Assistant Chef Concierge.', true);
+    } else {
+      // No link, no saved login on this device: the normal case for the shared link/QR.
+      showLogin('', false);
+    }
+  });
 })();
 
 </script>
