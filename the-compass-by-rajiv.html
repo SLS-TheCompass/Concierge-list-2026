@@ -552,6 +552,13 @@ html.checking #splash { display:flex; }
 .app-admin .act-row .nums .n{ font-weight:700; color:var(--brass); }
 .app-admin .act-row.never{ opacity:.55; }
 .app-admin .act-head{ display:flex; justify-content:space-between; font-size:11px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.03em; padding-bottom:6px; }
+.app-admin .zr-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:9px 0; border-top:1px solid var(--line); }
+.app-admin .zr-row:first-child{ border-top:none; }
+.app-admin .zr-row .term{ font-weight:700; color:var(--pine); font-size:13.5px; }
+.app-admin .zr-row .tool{ font-size:11px; color:var(--brass); font-weight:700; text-transform:uppercase; letter-spacing:.02em; margin-left:6px; }
+.app-admin .zr-row .nums{ font-size:12.5px; color:var(--ink); white-space:nowrap; }
+.app-admin .zr-row .nums .n{ font-weight:700; color:var(--brass); }
+.app-admin .zr-empty{ font-size:13px; color:var(--ink-soft); padding:6px 0; }
 
 </style>
 </head>
@@ -591,6 +598,24 @@ html.checking #splash { display:flex; }
     window.__MASTER_VERIFIED__ = window.__IS_MASTER__ && masterVerified;
     document.documentElement.classList.add('checking');
   })();
+
+  // Shared helpers used by both search boxes to quietly flag searches that found nothing,
+  // so gaps in the directory or the Compass Book can be spotted later in Staff Access.
+  window.__debounce = function (fn, wait) {
+    var t;
+    return function () {
+      var args = arguments;
+      clearTimeout(t);
+      t = setTimeout(function () { fn.apply(null, args); }, wait);
+    };
+  };
+  window.__logZeroResult = function (tool, term) {
+    term = (term || '').trim();
+    if (term.length < 3 || !window.goatcounter || !window.goatcounter.count) return;
+    var safe = term.toLowerCase().replace(/[^a-z0-9 ]/g, '').trim().replace(/\s+/g, '-').slice(0, 60);
+    if (!safe) return;
+    window.goatcounter.count({ path: 'zr-' + tool + '-' + safe, title: '[' + tool + '] No results for: ' + term, event: true });
+  };
 </script>
 
 
@@ -778,6 +803,12 @@ html.checking #splash { display:flex; }
       <div class="msg" id="aActMsg"></div>
       <div id="aActTable"></div>
       <p style="margin-top:14px;"><button class="btn secondary" id="aGcRefreshBtn">Refresh</button> <button class="btn secondary" id="aGcDisconnectBtn">Disconnect this device</button></p>
+    </div>
+
+    <div class="card" id="aZeroResults" style="display:none;">
+      <h3>Zero-Result Searches</h3>
+      <p>Searches that came back empty in the Concierge tool or Compass Book — a good way to spot real gaps. Uses the same connection as Activity Overview above; refreshing that also refreshes this.</p>
+      <div id="aZeroTable"></div>
     </div>
   </div>
 </div>
@@ -1267,10 +1298,16 @@ function printItem(item) {
 const searchInput = document.getElementById('cSearchInput');
 const clearBtn = document.getElementById('cClearBtn');
 
+const debouncedConciergeZeroCheck = window.__debounce(function () {
+  const stillFiltered = sortResults(getFilteredData(searchTerm, activeSection, activeDiet), activeSection);
+  if (stillFiltered.length === 0) window.__logZeroResult('concierge', searchTerm);
+}, 900);
+
 searchInput.addEventListener('input', (e) => {
   searchTerm = e.target.value;
   clearBtn.style.display = searchTerm ? 'block' : 'none';
   renderResults();
+  debouncedConciergeZeroCheck();
 });
 
 clearBtn.addEventListener('click', () => {
@@ -1470,7 +1507,12 @@ function bookRoute(sub) {
 
 /* ---------- wire up ---------- */
 const searchInput = document.getElementById('bSearchInput'), clearBtn = document.getElementById('bClearBtn');
-searchInput.addEventListener('input', e => { query = e.target.value; shown = PAGE; clearBtn.style.display = query ? 'block' : 'none'; renderHome(); });
+const debouncedBookZeroCheck = window.__debounce(function () {
+  const ts = terms();
+  const stillRes = SEARCHABLE.filter(b => (activeCat === 'All' || b.cat === activeCat) && ts.every(t => b.hay.indexOf(t) >= 0));
+  if (stillRes.length === 0) window.__logZeroResult('book', query);
+}, 900);
+searchInput.addEventListener('input', e => { query = e.target.value; shown = PAGE; clearBtn.style.display = query ? 'block' : 'none'; renderHome(); debouncedBookZeroCheck(); });
 clearBtn.addEventListener('click', () => { searchInput.value = ''; query = ''; clearBtn.style.display = 'none'; searchInput.focus(); renderHome(); });
 document.getElementById('backBtn').addEventListener('click', () => { location.hash = document.getElementById('view-book').classList.contains('in-edition') ? 'book' : ''; });
 window.addEventListener('resize', positionSticky);
@@ -1647,6 +1689,7 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
   function actPanels(which) {
     $('aActConnect').style.display = which === 'connect' ? 'block' : 'none';
     $('aActivity').style.display = which === 'main' ? 'block' : 'none';
+    $('aZeroResults').style.display = which === 'main' ? 'block' : 'none';
   }
   function actMsg(text, kind) { var m = $('aActMsg'); m.className = text ? 'msg ' + kind : 'msg'; m.textContent = text || ''; }
 
@@ -1690,19 +1733,44 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
       if (r.status === 401) { setGcToken(''); actPanels('connect'); actMsg('GoatCounter did not accept that key. Please paste a new one.', 'err'); return; }
       if (r.status === 403) { actMsg('This key cannot read statistics. Check it has "Read statistics" ticked, then reconnect.', 'err'); return; }
       if (!r.ok) { actMsg('Could not load activity (error ' + r.status + ').', 'err'); return; }
-      var byId = {};
+      var byId = {}, zrMap = {};
       (r.data.hits || []).forEach(function (hit) {
-        var m = /(home|concierge|book|admin)-([A-Za-z0-9]+)$/i.exec(hit.path || '');
-        if (!m) return;
-        var kind = m[1], id = m[2].toUpperCase();
-        if (!byId[id]) byId[id] = { total: 0, last: null };
-        byId[id].total += hit.count || 0;
-        var la = lastActiveDay(hit);
-        if (la && (!byId[id].last || la > byId[id].last)) byId[id].last = la;
+        var m = /(home|concierge|book|admin)-(SLS\d{6})$/i.exec(hit.path || '');
+        if (m) {
+          var kind = m[1], id = m[2].toUpperCase();
+          if (!byId[id]) byId[id] = { total: 0, last: null };
+          byId[id].total += hit.count || 0;
+          var la = lastActiveDay(hit);
+          if (la && (!byId[id].last || la > byId[id].last)) byId[id].last = la;
+          return;
+        }
+        var tm = /^\[(concierge|book)\]\s*No results for:\s*(.+)$/i.exec(hit.title || '');
+        if (tm) {
+          var tool = tm[1].toLowerCase(), term = tm[2].trim();
+          var key = tool + '::' + term.toLowerCase();
+          if (!zrMap[key]) zrMap[key] = { tool: tool, term: term, total: 0, last: null };
+          zrMap[key].total += hit.count || 0;
+          var la2 = lastActiveDay(hit);
+          if (la2 && (!zrMap[key].last || la2 > zrMap[key].last)) zrMap[key].last = la2;
+        }
       });
       actMsg('', 'info');
       renderActivity(byId);
+      renderZeroResults(zrMap);
     }).catch(function () { actMsg('Could not reach GoatCounter. Check your connection and try again.', 'err'); });
+  }
+
+  function renderZeroResults(zrMap) {
+    var rows = Object.keys(zrMap).map(function (k) { return zrMap[k]; });
+    rows.sort(function (a, b) { return b.total - a.total; });
+    var container = $('aZeroTable');
+    if (!rows.length) { container.innerHTML = '<p class="zr-empty">No zero-result searches recorded yet.</p>'; return; }
+    container.innerHTML = rows.map(function (r) {
+      return '<div class="zr-row">' +
+        '<div><span class="term">' + esc(r.term) + '</span><span class="tool">' + esc(r.tool) + '</span></div>' +
+        '<div class="nums"><span class="n">' + r.total + '</span> times &middot; last ' + esc(r.last || 'unknown') + '</div>' +
+        '</div>';
+    }).join('');
   }
 
   function renderActivity(byId) {
