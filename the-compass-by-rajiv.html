@@ -851,7 +851,7 @@ html.checking #splash { display:flex; }
   <p>Cocktails, light bites, tropical flavours.</p>
 </div>
 
-<h3 class="sec" id="sls-transport">Transport</h3>
+<h3 class="sec" id="sls-limo">Limousine</h3>
 <div class="card">
   <p><b>Limousine</b> (nett, one-way, effective 1 June 2026):</p>
   <ul>
@@ -863,8 +863,13 @@ html.checking #splash { display:flex; }
     <li>Wheelchair Accessible Van: $300</li>
     <li>Midnight surcharge: $20/vehicle (11pm–7am)</li>
   </ul>
+</div>
+
+<h3 class="sec" id="sls-carpark">Car Park</h3>
+<div class="card">
   <p><b>Self-parking:</b> First hour $6; then $2 per 30 min (7am–6pm). $8 per entry (6pm–7am).</p>
   <p><b>Valet:</b> $20 nett/day.</p>
+  <p style="color:var(--ink-soft);font-size:12.5px;">Number of car park levels and height clearance details to be added.</p>
 </div>
 
 <h3 class="sec" id="sls-rooms">Room Categories</h3>
@@ -877,11 +882,18 @@ html.checking #splash { display:flex; }
 <h3 class="sec" id="sls-horizon">Horizon Club</h3>
 <div class="card">
   <p>Lounge on the 24th floor, Tower Wing. Available with Horizon Club category rooms/suites (levels 20–23) and select suites.</p>
-  <p>Priority check-in/out, concierge assistance, daily afternoon tea, evening cocktails &amp; canapés, L'Occitane Jasmine toiletries.</p>
+  <p><b>Operating hours:</b> Daily 6:30am–11:00pm.</p>
+  <p><b>F&amp;B schedule:</b></p>
+  <ul>
+    <li>Breakfast buffet: 6:30am–10:30am</li>
+    <li>Light refreshments: available throughout the day</li>
+    <li>Afternoon tea: 2:00pm–4:00pm</li>
+    <li>Evening cocktails &amp; canapés: 5:00pm–7:00pm</li>
+  </ul>
+  <p>Priority check-in/out, concierge assistance, L'Occitane Jasmine toiletries.</p>
   <p>Dress code: business or smart elegant.</p>
 </div>
 
-<p style="text-align:center;font-size:12px;color:var(--ink-soft);padding:16px 0 40px;">Details verified against shangri-la.com and official outlet sources. Rates and hours subject to change — reconfirm for anything time-sensitive.</p>
 
 </div>
 </div>
@@ -2238,9 +2250,8 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
   // or people who haven't opened the app in a while will wrongly see them as new again.
   // Cleared on 5 Oct 2026 ahead of manager review, so no development backlog shows on first open.
   // Add new entries here as { id: <next number>, date: '...', text: '...' } going forward.
+  // Cleared on 5 Oct 2026. Add new entries here as { id: <next number>, date: '...', text: '...' } going forward.
   var CHANGELOG = [
-    { id: 1, date: '5 Oct 2026', text: '"Family & Kids" renamed to "Attractions". New filters added: Solo/Couple and Family. 7 Sentosa attractions added (Universal Studios, Oceanarium, Adventure Cove, Skyline Luge, Madame Tussauds, Fort Siloso & Skywalk, Cable Car), most with direct ticket links.' },
-    { id: 2, date: '5 Oct 2026', text: '3 play centres for children added: Amazonia, KidZania Singapore and Pororo Park. New "Closing Soon" filter added to flag venues with a known upcoming closure.' }
   ];
   var WN_KEY = 'sls_whatsnew_seen_v1';
   var __wnCurrentKeys = [];
