@@ -535,7 +535,10 @@ html.checking #splash { display:flex; }
 .app-book .more-btn{ display:block; width:100%; background:var(--pine); color:var(--cream); border:none; padding:13px; border-radius:10px; font-size:14px; font-weight:600; cursor:pointer; margin:6px 0 10px; }
 .app-book .empty{ text-align:center; padding:60px 20px; color:var(--ink-soft); }
 .app-book .empty .t{ font-family:'Cormorant Garamond',serif; font-size:22px; color:var(--pine); margin-bottom:6px; }
-.app-book .ed-body{ background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:6px 18px 18px; margin-top:14px; }
+.app-book .ed-archived-note{ background:#FFF3DC; border:1px solid var(--brass-light); color:#8C6A24; border-radius:8px; padding:10px 14px; font-size:12.5px; margin-top:14px; line-height:1.4; }
+.app-book .ed-body a{ color:var(--pine); text-decoration:underline; }
+.app-book .ed-body a.ed-xref{ font-weight:600; }
+.app-book .ed-body{ background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:6px 18px 18px; margin-top:0; }
 .app-book .ed-body h3.sec{ font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700; color:var(--paper); background:var(--pine); padding:10px 14px; border-radius:8px; margin:24px -6px 10px; scroll-margin-top:130px; line-height:1.25; }
 .app-book .ed-body h4.item{ font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:700; color:var(--pine); margin:18px 0 4px; padding-top:14px; border-top:1px solid var(--line); scroll-margin-top:130px; line-height:1.25; }
 .app-book .ed-body p{ font-size:14px; line-height:1.6; margin:6px 0; }
@@ -607,6 +610,10 @@ html.checking #splash { display:flex; }
 .app-sls .card ul{ padding-left:20px; margin:6px 0; }
 .app-sls .card li{ margin:3px 0; font-size:14px; line-height:1.55; }
 .app-sls .card b{ color:var(--pine); }
+.app-sls .sls-table{ width:100%; border-collapse:collapse; margin:10px 0 14px; font-size:13.5px; }
+.app-sls .sls-table th{ text-align:left; background:var(--cream); color:var(--pine); font-weight:700; padding:7px 10px; border-bottom:2px solid var(--brass-light); }
+.app-sls .sls-table td{ padding:7px 10px; border-bottom:1px solid var(--line); }
+.app-sls .sls-table tr:last-child td{ border-bottom:none; }
 .app-admin .zr-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:9px 0; border-top:1px solid var(--line); }
 .app-admin .zr-row:first-child{ border-top:none; }
 .app-admin .zr-row .term{ font-weight:700; color:var(--pine); font-size:13.5px; }
@@ -882,16 +889,17 @@ html.checking #splash { display:flex; }
 <h3 class="sec" id="sls-horizon">Horizon Club</h3>
 <div class="card">
   <p>Lounge on the 24th floor, Tower Wing. Available with Horizon Club category rooms/suites (levels 20–23) and select suites.</p>
-  <p><b>Operating hours:</b> Daily 6:30am–11:00pm.</p>
-  <p><b>F&amp;B schedule:</b></p>
-  <ul>
-    <li>Breakfast buffet: 6:30am–10:30am</li>
-    <li>Light refreshments: available throughout the day</li>
-    <li>Afternoon tea: 2:00pm–4:00pm</li>
-    <li>Evening cocktails &amp; canapés: 5:00pm–7:00pm</li>
-  </ul>
+  <table class="sls-table">
+    <tr><th>Service</th><th>Timing</th></tr>
+    <tr><td>Lounge open</td><td>Daily, 6:30am&ndash;11:00pm</td></tr>
+    <tr><td>Breakfast buffet</td><td>6:30am&ndash;10:30am</td></tr>
+    <tr><td>Light refreshments</td><td>Throughout the day</td></tr>
+    <tr><td>Afternoon tea</td><td>2:00pm&ndash;4:00pm</td></tr>
+    <tr><td>Evening cocktails &amp; canap&eacute;s</td><td>5:00pm&ndash;7:00pm</td></tr>
+  </table>
+  <p><b>Child access:</b> Monday&ndash;Friday, guests must be aged 12 and above. Saturday&ndash;Sunday, all ages welcome. Maximum occupancy 2 adults per room; no extra bed due to space limitations.</p>
+  <p><b>Dress code:</b> Business or smart casual.</p>
   <p>Priority check-in/out, concierge assistance, L'Occitane Jasmine toiletries.</p>
-  <p>Dress code: business or smart elegant.</p>
 </div>
 
 
@@ -969,6 +977,7 @@ html.checking #splash { display:flex; }
 
     <div class="card" id="aActivity" style="display:none;">
       <h3>Activity Overview</h3>
+      <p style="color:var(--ink-soft);font-size:12.5px;">This is recorded history, not a live view — it shows how often each Staff ID has opened The Compass and when it was last recorded, not who is online right now.</p>
       <div class="msg" id="aActMsg"></div>
       <div id="aActTable"></div>
       <p style="margin-top:14px;"><button class="btn secondary" id="aGcRefreshBtn">Refresh</button> <button class="btn secondary" id="aGcDisconnectBtn">Disconnect this device</button></p>
@@ -1171,15 +1180,15 @@ const DATA = [
   { section: "Restaurant", category: "Seafood", name: "Sin Huat Eating House", contact: "659/661 Lorong 35 Geylang, S389589", phone: "+65 6744 9755", website: "", hours: "Daily 6:30pm-12am (some sources note extended to 1am).", notes: "No printed menu — owner-chef Danny Lee takes orders verbally. Signature crab bee hoon, credited as its inventor; a favourite of Anthony Bourdain, who featured it on his show. One of 17 Bib Gourmand establishments in every Singapore edition since 2016. Not halal-certified.", michelin: "Bib Gourmand", openLate: true, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
   { section: "Restaurant", category: "Thai", name: "Yhingthai Palace", contact: "36 Purvis Street, #01-04, S188613", phone: "+65 6337 1161 / +65 6337 9429", website: "https://yhingthai.com.sg/", hours: "Daily 11:30am-2pm, 6-10pm.", notes: "Long-standing, family-friendly Thai restaurant near City Hall/Bugis. Known for authentic curries and Thai desserts like mango sticky rice. One of 17 Bib Gourmand establishments in every Singapore edition since 2016.", michelin: "Bib Gourmand", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
   { section: "Restaurant", category: "Malay/Nasi Lemak", name: "The Coconut Club (Beach Road)", contact: "269 Beach Road, S199546", phone: "+65 8725 3315", website: "https://www.thecoconutclub.sg/beach-road", hours: "Tue-Fri 11am-10:30pm; Sat-Sun 11am-10:30pm (some sources note 8:30am weekend start). Closed Mon.", notes: "Flagship of the acclaimed nasi lemak brand, now under The Lo & Behold Group (also behind Odette). Signature 'White Sutera' coconut milk-infused rice, ayam goreng berempah, charcoal-grilled barramundi otah. Restored heritage shophouse setting in Kampong Gelam.", michelin: "Bib Gourmand", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
-  { section: "Restaurant", category: "National Gallery Singapore", name: "Milli: Sky Dining, Bar & Lounge", contact: "1 St Andrew's Road, #05-02/#06-01, National Gallery Singapore", phone: "", website: "", hours: "Confirm exact hours (rooftop restaurant and club lounge)", notes: "Two-storey rooftop restaurant on the former Smoke & Mirrors site. Chef LG Han of Michelin-starred Labyrinth with Vijay Mudaliar of Native, and the team behind nightlife concept Bae's Cocktail Club. Signature: spring chicken rice paella; king crab with white pepper and salted egg yolk sauce. Best for couples, business travellers, skyline views.", michelin: "-", openLate: false, free: false, rainyDay: false, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
-  { section: "Restaurant", category: "Japanese - Casual", name: "Hikiniku to Come", contact: "VivoCity (confirm exact unit)", phone: "", website: "", hours: "Confirm exact hours", notes: "Tokyo charcoal-grilled hamburg steak chain, Singapore debut. Single set meal of three 90g patties, ground fresh in-store and grilled over binchotan charcoal, served one at a time. Set meal from S$27.90++. Expect queues; best for an early lunch before the noon rush.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
-  { section: "Restaurant", category: "Korean", name: "Bibim Deli", contact: "Confirm exact address", phone: "", website: "", hours: "Confirm exact hours", notes: "DIY Korean rice bowl concept by Culinary Class Wars chef Yohan Kim. More than 20 rotating banchan and sauces mixed onto a free base bowl of rice. Good value for a quick, casual lunch between meetings.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
-  { section: "Restaurant", category: "Japanese - Hot Pot", name: "Sukiyaki Jin", contact: "Orchard (confirm exact address)", phone: "", website: "", hours: "Confirm exact hours", notes: "Singapore's first A5 wagyu tomato sukiyaki, putting a tomato-based twist on the traditional hot pot. A distinctive dinner pick for guests who already know the more familiar sukiyaki spots.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: true, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
-  { section: "Restaurant", category: "Cafe", name: "Tiffany & Co. Blue Box Cafe", contact: "ION Orchard, top floor of the Tiffany flagship store", phone: "", website: "", hours: "Confirm exact hours", notes: "Tiffany's first cafe concept in Southeast Asia. Menu developed with Julien Royer of three-Michelin-starred Odette; American cafe classics with French polish and Singapore touches. Tables go fast; advise guests to book as early as reservations open.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: true, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
+  { section: "Restaurant", category: "National Gallery Singapore", name: "Milli: Sky Dining, Bar & Lounge", contact: "1 St Andrew's Road, National Gallery Singapore, Level 5 & 6, Singapore 178957", phone: "", website: "", hours: "Sky Dining & Bar (Level 6): Sun-Tue 11am-1am, Wed-Fri 11am-3am, Sat & eve of PH 11am-4am. Lounge (Level 5): Sun-Tue 6pm-1am, Wed-Fri 6pm-3am, Sat & eve of PH 6pm-4am.", notes: "Two-storey rooftop restaurant on the former Smoke & Mirrors site. Chef LG Han of Michelin-starred Labyrinth with Vijay Mudaliar of Native, and the team behind nightlife concept Bae's Cocktail Club. Signature: spring chicken rice paella; king crab with white pepper and salted egg yolk sauce. Best for couples, business travellers, skyline views.", michelin: "-", openLate: false, free: false, rainyDay: false, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
+  { section: "Restaurant", category: "Japanese - Casual", name: "Hikiniku to Come", contact: "1 HarbourFront Walk, VivoCity, #01-102/103, Singapore 098585", phone: "", website: "", hours: "Daily 11am-10pm.", notes: "Tokyo charcoal-grilled hamburg steak chain, Singapore debut. Single set meal of three 90g patties, ground fresh in-store and grilled over binchotan charcoal, served one at a time. Set meal from S$27.90++. Expect queues; best for an early lunch before the noon rush.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
+  { section: "Restaurant", category: "Korean", name: "Bibim Deli", contact: "B1-172, Suntec City Tower 3, 8 Temasek Blvd, Singapore 038988", phone: "", website: "", hours: "Daily 11:30am-3pm, 5-10pm.", notes: "DIY Korean rice bowl concept by Culinary Class Wars chef Yohan Kim. More than 20 rotating banchan and sauces mixed onto a free base bowl of rice. Good value for a quick, casual lunch between meetings.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
+  { section: "Restaurant", category: "Japanese - Hot Pot", name: "Sukiyaki Jin", contact: "1 Scotts Road, Shaw Centre, #01-11, Singapore 228208", phone: "", website: "", hours: "Daily 11:30am-3pm, 5:30pm-10pm.", notes: "Singapore's first A5 wagyu tomato sukiyaki, putting a tomato-based twist on the traditional hot pot. A distinctive dinner pick for guests who already know the more familiar sukiyaki spots.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: true, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
+  { section: "Restaurant", category: "Cafe", name: "Tiffany & Co. Blue Box Cafe", contact: "2 Orchard Turn, #03-11/12, ION Orchard, Singapore 238801", phone: "", website: "", hours: "Daily 10am-10pm (Breakfast 10-11:30am, All Day Dining 11:30am-9pm, Tea 2:30-5:30pm).", notes: "Tiffany's first cafe concept in Southeast Asia. Menu developed with Julien Royer of three-Michelin-starred Odette; American cafe classics with French polish and Singapore touches. Tables go fast; advise guests to book as early as reservations open.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: true, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
   { section: "Bar", category: "Cocktail Bar", name: "Singapore Martini Club", contact: "Orchard Rendezvous Hotel, 1 Tanglin Road, S247905", phone: "+65 8185 1684", website: "https://www.thesingaporemartiniclub.sg/", hours: "Tue-Sat 6pm-2am. Closed Sun-Mon.", notes: "Vintage luxury train-carriage theme by Master Bartender Dario Knox (The Backdrop). Over 50 martinis, alcoholic and zero-proof, organised into 'stops' from fruity to spirit-forward. Signature: Tokyo Spice Martini; Sub-Zero Dirty Martini served tableside at around -10°C. Bookings of 8+ or events: events@thesingaporemartiniclub.sg", michelin: "-", openLate: true, free: false, rainyDay: true, nearOrchard: true, bookingUrl: "", familyFriendly: false, soloFriendly: true, closingSoon: false },
   { section: "Restaurant", category: "Singapore Heritage", name: "Tembusu", contact: "1 Cluny Road, Ginger Garden, Singapore Botanic Gardens", phone: "", website: "", hours: "Daily 8am-9pm (main menu).", notes: "'Borderless Straits' dining concept from Fleursophy Group founder Nicole Chen, inside the UNESCO-listed Botanic Gardens. Named for the native Tembusu tree on the Singapore five-dollar note; the Gardens' own Tembusu specimen is over 200 years old. Menu draws on cuisines across the Straits of Malacca. Soft-opened 3 August 2026, official launch 3 September 2026. Best for combining a Gardens visit with a proper meal.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
-  { section: "Restaurant", category: "Street Food (Hawker)", name: "Tian Tian Chicken Rice (Jewel Changi Airport)", contact: "Jewel Changi Airport, Basement, next to Food Republic", phone: "", website: "", hours: "Confirm exact hours", notes: "New outlet of the Maxwell Food Centre original (founded 1986 by Madam Foo Kui Lian), Bib Gourmand every year since 2016. Nearly 100 seats in the basement of Jewel Changi. Signature: Chicken Rice Set ($11++); Madam Foo's Steamed Chicken Curry ($13.80++, rare outside the original stall). Genuinely useful for layover guests or those departing early - one of the few ways to try a famous hawker name without a trip into town.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
-  { section: "Restaurant", category: "Korean Fried Chicken", name: "Mom's Touch", contact: "81 South Bridge Road, Boat Quay", phone: "", website: "", hours: "Confirm exact hours", notes: "One of South Korea's largest fried chicken chains (1,400+ outlets), returned to Singapore after leaving in 2022, in a Boat Quay shophouse. Collaboration with girl group LE SSERAFIM on three Singapore-exclusive burgers. Signature: SuperThigh Chicken Burger ($9.95); Boneless Fried Chicken Thigh ($12.95). Fun, casual pick for a Boat Quay dinner with drinks by the river.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
+  { section: "Restaurant", category: "Street Food (Hawker)", name: "Tian Tian Chicken Rice (Jewel Changi Airport)", contact: "Jewel Changi Airport, Basement, next to Food Republic", phone: "+65 6289 2668", website: "", hours: "Daily 10am-10pm (dine-in last order 9:30pm).", notes: "New outlet of the Maxwell Food Centre original (founded 1986 by Madam Foo Kui Lian), Bib Gourmand every year since 2016. Nearly 100 seats in the basement of Jewel Changi. Signature: Chicken Rice Set ($11++); Madam Foo's Steamed Chicken Curry ($13.80++, rare outside the original stall). Genuinely useful for layover guests or those departing early - one of the few ways to try a famous hawker name without a trip into town.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
+  { section: "Restaurant", category: "Korean Fried Chicken", name: "Mom's Touch", contact: "181 South Bridge Road, #01-03, 18 Cross, Singapore 058743", phone: "", website: "", hours: "Daily 7am-10pm.", notes: "One of South Korea's largest fried chicken chains (1,400+ outlets), returned to Singapore after leaving in 2022, in a Boat Quay shophouse. Collaboration with girl group LE SSERAFIM on three Singapore-exclusive burgers. Signature: SuperThigh Chicken Burger ($9.95); Boneless Fried Chicken Thigh ($12.95). Fun, casual pick for a Boat Quay dinner with drinks by the river.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
   { section: "Restaurant", category: "Spanish", name: "Sabòr", contact: "30 Victoria Street, #01-33, CHIJMES, S187996", phone: "+65 9611 9127", website: "https://www.saborchijmes.com/", hours: "Mon-Thu 4:30pm-12am; Fri-Sun 12-2pm, 4:30pm-12am.", notes: "Spanish bodega-style concept at CHIJMES, from the team behind Duomo Ristorante, in the former Privé space. 100-seat glass-enclosed dining room plus alfresco courtyard. Comfort-food tapas and sharing plates rather than fine-dining small plates; happy hour daily 4:30-6:30pm. Good alternative for guests who've done the CBD wine-bar circuit already. Note: the Compass edition text lists this as Boon Tat Street - the correct address is CHIJMES.", michelin: "-", openLate: true, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
   { section: "Restaurant", category: "Mediterranean", name: "NOOR Singapore", contact: "17 Mohamed Sultan Road, S238966", phone: "+65 8805 8075", website: "https://www.noor.sg/", hours: "Tue-Sun 5pm-12am. Closed Mon.", notes: "Mediterranean x Japanese kitchen and bar from chef-owner Titus Thamil. 65 seats plus a 10-seat izakaya at the back. Mediterranean cooking (tahini, labneh, harissa) with Japanese touches worked into the same plates (miso in hummus, yuzu in labneh). Not halal-certified. A distinctive alternative for guests who feel they've exhausted Singapore's Mediterranean and Japanese options separately.", michelin: "-", openLate: true, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
   { section: "Restaurant", category: "Japanese - Seafood", name: "Mukai", contact: "Plaza Singapura, #B1-07, 68 Orchard Road, S238839", phone: "", website: "https://www.instagram.com/kaisendokoro_mukai/", hours: "Daily 11:30am-3pm, 5:30-10pm.", notes: "Tokyo's cult-favourite Shibuya kaisendon specialist, first overseas outlet. Tall, piled 'Kaiho Don' seafood rice bowls, fish flown in from Japan; eat the sashimi cold first, then pour warm dashi over the rice for ochazuke. Bowls from $28.90++, with a limited daily Goku Goku bowl at $79.90++ (30/day); set meals $68-$99++. Not halal-certified. Strong pick for a fast, high-quality lunch while shopping - no reservation culture, just quality seafood done quickly.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: true, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
@@ -1249,12 +1258,23 @@ function renderFilters() {
   });
 }
 
+// Matches a dietary word only when it isn't negated (e.g. "not halal-certified",
+// "no vegetarian options" should NOT count as a match for that word).
+function matchesPositive(haystack, word) {
+  const re = new RegExp('(not|no|non)[\\s-]*' + word, 'i');
+  if (re.test(haystack)) {
+    // The word appears, but check if it ALSO appears elsewhere without negation
+    const withoutNegated = haystack.replace(new RegExp('(not|no|non)[\\s-]*' + word, 'gi'), '');
+    return withoutNegated.includes(word);
+  }
+  return haystack.includes(word);
+}
 function matchesDiet(item, diet) {
   if (!diet) return true;
   const haystack = `${item.category} ${item.notes}`.toLowerCase();
-  if (diet === "Halal") return haystack.includes("halal");
-  if (diet === "Vegetarian") return item.category === "Vegetarian" || haystack.includes("vegetarian");
-  if (diet === "Vegan") return item.category === "Vegan" || haystack.includes("vegan");
+  if (diet === "Halal") return matchesPositive(haystack, "halal");
+  if (diet === "Vegetarian") return item.category === "Vegetarian" || matchesPositive(haystack, "vegetarian");
+  if (diet === "Vegan") return item.category === "Vegan" || matchesPositive(haystack, "vegan");
   return true;
 }
 
@@ -1297,6 +1317,32 @@ function isClosed(item) {
 const CROSS_FILED_BARS = new Set([
   "Origin Bar", "Siloso Beach Bar", "The Bubble Bar", "Rumpoles Bar", "BayWatch@JEN"
 ]);
+// Renders a phone field as clickable tel: links where real numbers exist, and as
+// plain text for anything that isn't actually a number (prose, "N.A.", etc).
+// Handles fields with more than one number (e.g. "+65 1234 5678 / +65 8765 4321"),
+// and shorthand second numbers that share the first number's prefix (e.g. "+65 6221 6695 / 6684").
+function renderPhoneHtml(phone) {
+  if (!phone) return '';
+  var parts = phone.split('/').map(function (p) { return p.trim(); });
+  var lastFullDigits = null;
+  var rendered = parts.map(function (part) {
+    var m = part.match(/\+?\d[\d\s-]{2,}\d/);
+    if (!m) return esc(part);
+    var digits = m[0].replace(/[^\d+]/g, '');
+    var bare = digits.replace(/^\+/, '');
+    if (bare.length < 7 && lastFullDigits) {
+      // Short suffix (e.g. "6684") sharing the previous full number's prefix
+      var prevBare = lastFullDigits.replace(/^\+/, '');
+      digits = lastFullDigits.slice(0, lastFullDigits.length - bare.length) + bare;
+    } else {
+      lastFullDigits = digits;
+    }
+    return `<a href="tel:${digits}">${esc(part)}</a>`;
+  });
+  return rendered.join(' / ');
+}
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
 function isBar(item) {
   return item.section === "Bar" || CROSS_FILED_BARS.has(item.name);
 }
@@ -1411,7 +1457,7 @@ function renderResults() {
       </div>
       <p class="card-category">${item.category}</p>
       <div class="card-row"><span class="label">Where</span><span class="value">${item.contact}</span></div>
-      ${item.phone ? (item.phone.startsWith('N.A.') ? `<div class="card-row"><span class="label">Phone</span><span class="value">N.A.</span></div>` : `<div class="card-row"><span class="label">Phone</span><span class="value"><a href="tel:${item.phone.replace(/[^\d+]/g, '')}">${item.phone}</a></span></div>`) : ''}
+      ${item.phone ? `<div class="card-row"><span class="label">Phone</span><span class="value">${renderPhoneHtml(item.phone)}</span></div>` : ''}
       ${item.website ? (item.website === 'N.A.' ? `<div class="card-row"><span class="label">Website</span><span class="value">N.A.</span></div>` : `<div class="card-row"><span class="label">Website</span><span class="value"><a href="${normalizeUrl(item.website)}" target="_blank" rel="noopener">${shortDomain(item.website)}</a></span></div>`) : ''}
       <div class="card-row"><span class="label">Hours</span><span class="value">${item.hours}</span></div>
       <div class="card-row"><span class="label">Notes</span><span class="value">${item.notes}</span></div>
@@ -1442,7 +1488,7 @@ function renderResults() {
 
 function showQR(item) {
   const url = mapUrl(item);
-  document.getElementById('qrTitle').textContent = item.name;
+  document.getElementById('qrTitle').textContent = item.name + ' — Directions QR';
   document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(url)}`;
   document.getElementById('qrModal').classList.add('open');
 }
@@ -1689,6 +1735,35 @@ function renderHome() {
   }
   positionSticky();
 }
+// Applies a find/replace only to the parts of html that aren't already inside an <a> tag,
+// so repeated calls never double-wrap something an earlier stage already linked.
+function protectedReplace(html, regex, replacer) {
+  var parts = html.split(/(<a\b[^>]*>[\s\S]*?<\/a>)/gi);
+  for (var i = 0; i < parts.length; i++) {
+    if (i % 2 === 1) continue; // an existing <a>...</a> block - leave untouched
+    parts[i] = parts[i].replace(regex, replacer);
+  }
+  return parts.join('');
+}
+function linkifyEditionHtml(html) {
+  // [Edition 001, p.12] style cross-references -> jump to that edition
+  html = protectedReplace(html, /\[Edition (\d{3})(,\s*p\.?\s*\d+)?\]/g, function (m, num) {
+    return '<a href="#book/ed' + num + '" class="ed-xref">' + m + '</a>';
+  });
+  // Full URLs (http:// or https://)
+  html = protectedReplace(html, /\bhttps?:\/\/[^\s<>"]+[^\s<>".,)]/g, function (m) {
+    return '<a href="' + m + '" target="_blank" rel="noopener">' + m + '</a>';
+  });
+  // Bare domains mentioned without a scheme, e.g. "atlasbar.sg" or "jumboseafood.com.sg"
+  html = protectedReplace(html, /\b(?:[a-z0-9-]+\.)+(?:sg|com|net|org|io|co)\b(?:\/[^\s<>".,)]*)?/gi, function (m) {
+    return '<a href="https://' + m + '" target="_blank" rel="noopener">' + m + '</a>';
+  });
+  // Singapore phone numbers, e.g. +65 6221 6695
+  html = protectedReplace(html, /\+65[\s]?\d{4}[\s]?\d{4}/g, function (m) {
+    return '<a href="tel:' + m.replace(/\s/g, '') + '">' + m + '</a>';
+  });
+  return html;
+}
 function renderEdition(num, anchor) {
   const ed = EDMAP[num];
   if (!ed) { location.hash = 'book'; return; }
@@ -1705,7 +1780,8 @@ function renderEdition(num, anchor) {
   const idx = EDITIONS.findIndex(e => e.num === num);
   const prev = EDITIONS[idx - 1], next = EDITIONS[idx + 1];
   document.getElementById('main').innerHTML =
-    `<div class="ed-body">${ed.html}</div>
+    `<div class="ed-archived-note">Archived edition &mdash; covers ${esc(ed.range)}. Events, promotions and prices mentioned here may have since ended or changed; always reconfirm before recommending to a guest today.</div>
+     <div class="ed-body">${linkifyEditionHtml(ed.html)}</div>
      <div class="ed-nav">
        <button ${prev ? `data-go="${prev.num}"` : 'disabled'}>← Edition ${prev ? prev.num : ''}</button>
        <button ${next ? `data-go="${next.num}"` : 'disabled'}>Edition ${next ? next.num : ''} →</button>
@@ -2022,12 +2098,12 @@ window.__bookInfo = { count: EDITIONS.length, latest: EDITIONS[EDITIONS.length -
       return { id: id, name: names[id] || '', total: a.total, last: a.last };
     });
     rows.sort(function (a, b) { return b.total - a.total; });
-    var html = '<div class="act-head"><span>Staff</span><span>Opens (approx. devices)</span></div>';
+    var html = '<div class="act-head"><span>Staff</span><span>Recorded opens (approx. devices) &middot; last recorded</span></div>';
     html += rows.map(function (r) {
       var never = r.total === 0;
       return '<div class="act-row' + (never ? ' never' : '') + '">' +
         '<div class="who"><div class="id">' + esc(r.id) + (r.id === MASTER ? ' (you)' : '') + '</div>' + (r.name ? '<div class="nm">' + esc(r.name) + '</div>' : '') + '</div>' +
-        '<div class="nums">' + (never ? 'Never opened' : ('<span class="n">' + r.total + '</span> opens &middot; last ' + esc(r.last || 'unknown'))) + '</div>' +
+        '<div class="nums">' + (never ? 'No recorded opens' : ('<span class="n">' + r.total + '</span> recorded opens &middot; last recorded ' + esc(r.last || 'unknown'))) + '</div>' +
         '</div>';
     }).join('');
     $('aActTable').innerHTML = html;
