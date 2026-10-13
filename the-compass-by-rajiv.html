@@ -2077,7 +2077,7 @@ function bkParts(item, f) {
     guest: f.guest, room: f.room, dear: 'Dear ' + bkSalutation(f.guest) + ',',
     intro: 'We are pleased to confirm your request as follows.',
     rows: rows,
-    help: 'If you require any assistance please do not hesitate to contact us directly at extension 7210 or e-mail: SLSConcierge@shangri-la.com',
+    help: 'Please do not hesitate to contact us at +65 6213 4482 / ext 7210 or email SLSConcierge@shangri-la.com should you require further assistance.',
     wish: wish, sigName: f.sigName, sigTitle: f.sigTitle
   };
 }
@@ -2446,7 +2446,7 @@ function printItem(item) {
       items: slItems().map(function (it) {
         return { name: it.name, cat: it.category, addr: it.contact, tel: bkPhoneText(it), hours: shortSentence(it.hours, 150), map: bkShortMap(it), note: shortSentence(it.notes, 150) };
       }),
-      help: 'To make a reservation, or for any assistance, please contact the Concierge at extension 7210 or e-mail: SLSConcierge@shangri-la.com',
+      help: 'To make a reservation, or for any assistance, please contact the Concierge at +65 6213 4482 / ext 7210 or email SLSConcierge@shangri-la.com',
       sigName: $('slSigName').value.trim(), sigTitle: $('slSigTitle').value.trim()
     };
   }
@@ -3544,8 +3544,11 @@ html.guest #guestConf{ display:block; }
 #guestConf .gc-chip{ display:inline-flex; align-items:center; gap:7px; background:var(--pine); color:#fff; border-radius:999px; padding:8px 14px; font-size:13.5px; font-weight:600; }
 #guestConf .gc-chip svg{ width:16px; height:16px; stroke:var(--brass-light); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
 #guestConf .gc-body{ padding:20px 22px 8px; }
-#guestConf .gc-hello{ font-family:'Cormorant Garamond',Georgia,serif; font-size:21px; font-weight:700; color:var(--pine); margin:0 0 4px; }
-#guestConf .gc-note{ font-size:13.5px; line-height:1.55; color:var(--ink-soft); margin:0 0 14px; }
+#guestConf .gc-hello{ font-family:'Cormorant Garamond',Georgia,serif; font-size:24px; font-weight:700; color:var(--pine); margin:0 0 4px; }
+#guestConf .gc-note{ font-size:16px; line-height:1.5; color:var(--ink); margin:0 0 14px; }
+#guestConf .gc-gbox{ background:#EEF3EF; border-left:4px solid var(--brass); border-radius:10px; padding:12px 14px; margin:0 0 6px; }
+#guestConf .gc-gname{ font-family:'Cormorant Garamond',Georgia,serif; font-weight:700; font-size:26px; line-height:1.15; color:var(--pine); }
+#guestConf .gc-gmeta{ display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:6px; font-size:17px; font-weight:700; color:var(--ink); }
 #guestConf .gc-guest{ font-size:12.5px; color:var(--ink-soft); margin:0 0 4px; }
 #guestConf .gc-list{ list-style:none; margin:0; padding:0; }
 #guestConf .gc-list li{ display:flex; gap:12px; padding:13px 0; border-top:1px solid var(--line); }
@@ -3569,7 +3572,7 @@ html.guest #guestConf{ display:block; }
 .gc-ovin img{ width:100%; height:auto; border:1px solid #E4DFD3; border-radius:8px; }
 .gc-ovin .gc-btn{ display:block; text-align:center; padding:13px; border-radius:12px; text-decoration:none; font-size:14.5px; font-weight:700; background:#A9812E; color:#fff; border:1px solid #A9812E; cursor:pointer; font-family:inherit; width:100%; }
 .gc-ovin .gc-btn.alt{ background:#fff; color:#16332B; border-color:#16332B; }
-#guestConf .gc-end a{ color:var(--pine); font-weight:600; }
+#guestConf .gc-end a{ color:var(--pine); font-weight:600; white-space:nowrap; }
 #guestConf .gc-wish{ font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:18px; color:var(--pine); }
 #guestConf .gc-sign{ font-size:13.5px; line-height:1.5; margin-top:8px; }
 #guestConf .gc-sign b{ font-family:'Cormorant Garamond',Georgia,serif; font-size:19px; color:var(--pine); }
@@ -4877,7 +4880,7 @@ var QRCode=M["index"];window.SLSQR={make:function(t,l){var q=new QRCode(-1,l==nu
   function e(x) { return String(x == null ? '' : x).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function link(v) { return /^https?:\/\//.test(v) ? '<a href="' + e(v) + '" target="_blank" rel="noopener">' + e(v) + '</a>' : e(v); }
   var box = document.getElementById('guestConf');
-  function fail(msg) { box.innerHTML = '<div class="gc-card"><p>' + e(msg) + '</p><p>Please ask the Concierge team for a copy of your confirmation: extension 7210 or SLSConcierge@shangri-la.com</p></div>'; }
+  function fail(msg) { box.innerHTML = '<div class="gc-card"><p>' + e(msg) + '</p><p>Please ask the Concierge team for a copy of your confirmation: +65 6213 4482 / ext 7210 or SLSConcierge@shangri-la.com</p></div>'; }
   function ics(o) {
     if (!o.date || !o.time) return '';
     var d = o.date.replace(/-/g, ''), t = o.time.replace(':', '') + '00', h = parseInt(o.time.split(':')[0], 10), m = o.time.split(':')[1];
@@ -4907,7 +4910,7 @@ var QRCode=M["index"];window.SLSQR={make:function(t,l){var q=new QRCode(-1,l==nu
     h += '<div class="gc-wrap"><div class="gc-card"><div class="gc-top"><div class="gc-eyebrow">' + e(R['Your request'] || 'Confirmation') + ' &middot; Confirmed</div>';
     h += '<div class="gc-venue">' + e(venue) + '</div><div class="gc-when">';
     h += '<span class="gc-chip">' + IC.cal + e(R['Date'] || '') + '</span><span class="gc-chip">' + IC.clock + e(R['Time'] || '') + '</span><span class="gc-chip">' + IC.people + e(R['Number of persons'] || '') + '</span></div></div>';
-    h += '<div class="gc-body"><p class="gc-hello">' + e(o.dear) + '</p><p class="gc-note">' + e(o.intro) + '</p><p class="gc-guest">' + e(o.guest) + (o.room ? ' &middot; Room ' + e(o.room) : '') + ' &middot; ' + e(o.dateLine) + '</p><ul class="gc-list">';
+    h += '<div class="gc-body"><p class="gc-hello">' + e(o.dear) + '</p><p class="gc-note">' + e(o.intro) + '</p><div class="gc-gbox"><div class="gc-gname">' + e(o.guest) + '</div><div class="gc-gmeta">' + (o.room ? '<span>Room ' + e(o.room) + '</span>' : '') + '<span>' + e(o.dateLine) + '</span></div></div><ul class="gc-list">';
     if (R['Address']) h += li('pin', 'Address', e(R['Address']));
     if (R['Telephone']) h += li('phone', 'Telephone', '<a href="tel:' + e(R['Telephone'].replace(/[^\d+]/g, '')) + '">' + e(R['Telephone']) + '</a>');
     extra.forEach(function (r) { h += li(/request|information|details/i.test(r[0]) ? 'note' : 'leaf', r[0], link(r[1])); });
@@ -4915,7 +4918,7 @@ var QRCode=M["index"];window.SLSQR={make:function(t,l){var q=new QRCode(-1,l==nu
     if (R['Map']) h += '<a class="gc-btn" href="' + e(R['Map']) + '" target="_blank" rel="noopener">Open in Maps</a>';
     h += '<button type="button" class="gc-btn dark" id="gcSave">Save confirmation to my phone</button>';
     if (ics(g)) h += '<button type="button" class="gc-btn alt" id="gcCal">Add to calendar</button><div class="gc-calbox" id="gcCalBox" hidden><a class="gc-btn alt" id="gcGoogle" target="_blank" rel="noopener">Google Calendar (Android and others)</a><button type="button" class="gc-btn alt" id="gcIcs">Apple, Samsung, Outlook (.ics file)</button></div>';
-    h += '</div><div class="gc-end"><p>If you require any assistance please do not hesitate to contact us directly at extension 7210 or e-mail <a href="mailto:SLSConcierge@shangri-la.com">SLSConcierge@shangri-la.com</a></p>';
+    h += '</div><div class="gc-end"><p>' + e(o.help).replace('+65 6213 4482', '<a href="tel:+6562134482">+65 6213 4482</a>').replace('SLSConcierge@shangri-la.com', '<a href="mailto:SLSConcierge@shangri-la.com">SLSConcierge@shangri-la.com</a>') + '</p>';
     h += '<div class="gc-wish">' + e(o.wish) + '</div><div class="gc-sign">Yours Sincerely<br><b>' + e(o.sigName) + '</b>' + (o.sigTitle ? '<br>' + e(o.sigTitle) : '') + '</div></div></div></div>';
     h += '<div class="gc-foot">Shangri-La Singapore Concierge</div>';
     box.innerHTML = h;
@@ -4971,7 +4974,7 @@ var QRCode=M["index"];window.SLSQR={make:function(t,l){var q=new QRCode(-1,l==nu
         b.ls.forEach(function (l) { yy += 50; x.fillText(l, pad, yy); }); yy += 34 - 10;
       });
       x.textAlign = 'center'; x.fillStyle = '#16332B'; x.font = 'italic 40px Georgia,serif'; x.fillText(o.wish, W / 2, total - 110);
-      x.fillStyle = '#6B675E'; x.font = '28px Arial,sans-serif'; x.fillText('Concierge  ·  ext 7210  ·  SLSConcierge@shangri-la.com', W / 2, total - 60);
+      x.fillStyle = '#6B675E'; x.font = '28px Arial,sans-serif'; x.fillText('Concierge  ·  +65 6213 4482  ·  ext 7210  ·  SLSConcierge@shangri-la.com', W / 2, total - 60);
       c.toBlob(function (blob) { showPicture(c.toDataURL('image/png'), blob, g); }, 'image/png');
     }
     if (g.logo) { var im = new Image(); im.onload = function () { body(im); }; im.onerror = function () { body(null); }; im.src = g.logo; } else body(null);
