@@ -1216,7 +1216,7 @@ const DATA = [
   { section: "Restaurant", category: "Italian", name: "OSO Ristorante", contact: "100 Peck Seah St, Level 27, Oasia Hotel Downtown", phone: "+65 6327 8378", website: "https://singapore.oso.sg/", hours: "Lunch Mon-Fri 12-2:30pm; Dinner Mon-Sat 6-10:30pm. Closed Sun.", notes: "Pioneer Italian dining destination since 2004. Rooftop setting with lush greenery and pools. Chef-owner Diego Chiarini", michelin: "-", openLate: false, free: false, rainyDay: false, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
   { section: "Restaurant", category: "French", name: "Gunther's Modern French Cuisine", contact: "36 Purvis St, #01-03", phone: "+65 9010 3075 (WhatsApp)", website: "https://www.gunthers.com.sg/", hours: "Mon-Fri 12-2:30pm, 6:30-10:30pm; Sat dinner only 6:30-10:30pm; Closed Sun", notes: "Chef Gunther Hubrechsen, trained under Alain Passard. Cold angel hair pasta with caviar; roasted suckling pig", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
   { section: "Restaurant", category: "French", name: "Les Amis", contact: "1 Scotts Rd, #01-16, Shaw Centre", phone: "+65 6733 2225", website: "https://www.lesamis.com.sg/", hours: "Daily: Lunch 12pm (last seating 1:15pm, last order 1:30pm); Dinner 7pm (last seating 8:15pm, last order 8:30pm).", notes: "One of Asia's finest wine lists. Set menus of French classics with occasional Asian influence. Signature blue lobster and potato salad; baba au rhum", michelin: "Three Star", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "https://www.sevenrooms.com/reservations/lesamisrestaurant", familyFriendly: true, soloFriendly: true, closingSoon: false },
-  { section: "Restaurant", category: "Peranakan & Local Heritage", name: "Candlenut", contact: "17A Dempsey Rd", phone: "+65 1800 304 2288", website: "https://www.comoepicurean.com/restaurants/candlenut/", hours: "Daily lunch 12-3pm, dinner 6-10pm", notes: "World's first Michelin-starred Peranakan restaurant. Chef Malcolm Lee. Wagyu Beef Rib Rendang, Babi Buah Keluak. Lunch set $88++/$108++; dinner set $108++/$138++. Not halal-certified.", michelin: "Star", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "https://www.sevenrooms.com/reservations/candlenutsingapore", familyFriendly: true, soloFriendly: true, closingSoon: false },
+  { section: "Restaurant", category: "Peranakan & Local Heritage", name: "Candlenut", contact: "17A Dempsey Rd", phone: "+65 6486 1051", website: "https://www.comoepicurean.com/restaurants/candlenut/", hours: "Daily lunch 12-3pm, dinner 6-10pm", notes: "World's first Michelin-starred Peranakan restaurant. Chef Malcolm Lee. Wagyu Beef Rib Rendang, Babi Buah Keluak. Lunch set $88++/$108++; dinner set $108++/$138++. Not halal-certified.", michelin: "Star", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "https://www.sevenrooms.com/reservations/candlenutsingapore", familyFriendly: true, soloFriendly: true, closingSoon: false },
   { section: "Restaurant", category: "Peranakan & Local Heritage", name: "National Kitchen by Violet Oon", contact: "#02-01 National Gallery Singapore (City Hall Wing), 1 St Andrew's Rd, S178957", phone: "", website: "https://violetoon.com/national-kitchen-by-violet-oon-national-gallery-singapore/", hours: "Daily 12-5pm, 6-10:30pm", notes: "Beef Rendang; Cod in Creamy Laksa Sauce", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
   { section: "Restaurant", category: "Halal", name: "Pistachio Middle Eastern & Mediterranean Grill", contact: "8 Raffles Avenue, #01-13D Annexe, Esplanade Mall, Singapore 039802", phone: "+65 6262 6400", website: "https://pistachiogrill.com", hours: "Daily 12-10pm (last order 9:15pm)", notes: "Halal-certified. 200-day grain-fed Angus beef rib, Jordanian Lamb Mansaf, Zarzuela De Mariscos (Mediterranean shellfish stew). Moved to the Esplanade waterfront in August 2026.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
   { section: "Restaurant", category: "Turkish", name: "Sofra Turkish Cafe & Restaurant", contact: "6 Raffles Blvd, #03-129A, Marina Square, Singapore 039594", phone: "+65 6291 1433", website: "sofra.sg", hours: "Daily 11:30am-10pm (closes 10:30pm Wed)", notes: "Serving Turkish food since 1999. Lamb shank, beef moussaka, freshly baked pide; Sofra Platter for groups.", michelin: "-", openLate: false, free: false, rainyDay: true, nearOrchard: false, bookingUrl: "", familyFriendly: true, soloFriendly: true, closingSoon: false },
@@ -2077,7 +2077,7 @@ function bkParts(item, f) {
     guest: f.guest, room: f.room, dear: 'Dear ' + bkSalutation(f.guest) + ',',
     intro: 'We are pleased to confirm your request as follows.',
     rows: rows,
-    help: 'Please do not hesitate to contact us at +65 6213 4482 / ext 7210 or email SLSConcierge@shangri-la.com should you require further assistance.',
+    help: 'Please do not hesitate to contact us should you require further assistance. Dial 7210 from your room, or +65 6213 4482 from outside the hotel, or email slsconcierge@shangri-la.com.',
     wish: wish, sigName: f.sigName, sigTitle: f.sigTitle
   };
 }
@@ -2446,7 +2446,7 @@ function printItem(item) {
       items: slItems().map(function (it) {
         return { name: it.name, cat: it.category, addr: it.contact, tel: bkPhoneText(it), hours: shortSentence(it.hours, 150), map: bkShortMap(it), note: shortSentence(it.notes, 150) };
       }),
-      help: 'To make a reservation, or for any assistance, please contact the Concierge at +65 6213 4482 / ext 7210 or email SLSConcierge@shangri-la.com',
+      help: 'To make a reservation, or for any assistance, please contact the Concierge. Dial 7210 from your room, or +65 6213 4482 from outside the hotel, or email slsconcierge@shangri-la.com.',
       sigName: $('slSigName').value.trim(), sigTitle: $('slSigTitle').value.trim()
     };
   }
@@ -4880,7 +4880,7 @@ var QRCode=M["index"];window.SLSQR={make:function(t,l){var q=new QRCode(-1,l==nu
   function e(x) { return String(x == null ? '' : x).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function link(v) { return /^https?:\/\//.test(v) ? '<a href="' + e(v) + '" target="_blank" rel="noopener">' + e(v) + '</a>' : e(v); }
   var box = document.getElementById('guestConf');
-  function fail(msg) { box.innerHTML = '<div class="gc-card"><p>' + e(msg) + '</p><p>Please ask the Concierge team for a copy of your confirmation: +65 6213 4482 / ext 7210 or SLSConcierge@shangri-la.com</p></div>'; }
+  function fail(msg) { box.innerHTML = '<div class="gc-card"><p>' + e(msg) + '</p><p>Please ask the Concierge team for a copy of your confirmation: dial 7210 from your room, or +65 6213 4482 from outside the hotel, or email slsconcierge@shangri-la.com</p></div>'; }
   function ics(o) {
     if (!o.date || !o.time) return '';
     var d = o.date.replace(/-/g, ''), t = o.time.replace(':', '') + '00', h = parseInt(o.time.split(':')[0], 10), m = o.time.split(':')[1];
@@ -4918,7 +4918,7 @@ var QRCode=M["index"];window.SLSQR={make:function(t,l){var q=new QRCode(-1,l==nu
     if (R['Map']) h += '<a class="gc-btn" href="' + e(R['Map']) + '" target="_blank" rel="noopener">Open in Maps</a>';
     h += '<button type="button" class="gc-btn dark" id="gcSave">Save confirmation to my phone</button>';
     if (ics(g)) h += '<button type="button" class="gc-btn alt" id="gcCal">Add to calendar</button><div class="gc-calbox" id="gcCalBox" hidden><a class="gc-btn alt" id="gcGoogle" target="_blank" rel="noopener">Google Calendar (Android and others)</a><button type="button" class="gc-btn alt" id="gcIcs">Apple, Samsung, Outlook (.ics file)</button></div>';
-    h += '</div><div class="gc-end"><p>' + e(o.help).replace('+65 6213 4482', '<a href="tel:+6562134482">+65 6213 4482</a>').replace('SLSConcierge@shangri-la.com', '<a href="mailto:SLSConcierge@shangri-la.com">SLSConcierge@shangri-la.com</a>') + '</p>';
+    h += '</div><div class="gc-end"><p>' + e(o.help).replace('+65 6213 4482', '<a href="tel:+6562134482">+65 6213 4482</a>').replace('slsconcierge@shangri-la.com', '<a href="mailto:slsconcierge@shangri-la.com">slsconcierge@shangri-la.com</a>') + '</p>';
     h += '<div class="gc-wish">' + e(o.wish) + '</div><div class="gc-sign">Yours Sincerely<br><b>' + e(o.sigName) + '</b>' + (o.sigTitle ? '<br>' + e(o.sigTitle) : '') + '</div></div></div></div>';
     h += '<div class="gc-foot">Shangri-La Singapore Concierge</div>';
     box.innerHTML = h;
@@ -4947,14 +4947,14 @@ var QRCode=M["index"];window.SLSQR={make:function(t,l){var q=new QRCode(-1,l==nu
     var o = g.P, W = 1080, pad = 70, c = document.createElement('canvas'), x = c.getContext('2d');
     function wrap(txt, font, maxW) { x.font = font; var words = String(txt).split(/\s+/), lines = [], cur = ''; words.forEach(function (w) { var tt = cur ? cur + ' ' + w : w; if (x.measureText(tt).width > maxW && cur) { lines.push(cur); cur = w; } else cur = tt; }); if (cur) lines.push(cur); return lines; }
     var items = [];
-    (o.rows || []).forEach(function (r) { if (r[0] !== 'Map' && r[0] !== 'Restaurant' && r[0] !== 'Bar' && r[0] !== 'Venue') items.push(r); });
+    (o.rows || []).forEach(function (r) { if (r[0] !== 'Map') items.push(r); });
     var H = 0; c.width = W; c.height = 3000;
     // measure
     var heroH = 330, y = heroH + 60;
     var venueLines = wrap(g.name, 'bold 62px Georgia,serif', W - pad * 2);
-    var total = heroH + 60 + 40 + venueLines.length * 74 + 70;
+    var guestLines = wrap(o.guest, 'bold 50px Georgia,serif', W - pad * 2 - 40); var total = heroH + 60 + 40 + venueLines.length * 74 + 70 + 40 + guestLines.length * 60 + 60 + 40;
     var blocks = items.map(function (r) { var ls = wrap(r[1], '600 38px Arial,sans-serif', W - pad * 2); total += 36 + ls.length * 50 + 34; return { k: r[0], ls: ls }; });
-    total += 190;
+    total += 230;
     c.height = total; x = c.getContext('2d');
     x.fillStyle = '#FBF8F2'; x.fillRect(0, 0, W, total);
     x.fillStyle = '#16332B'; x.fillRect(0, 0, W, heroH);
@@ -4966,15 +4966,19 @@ var QRCode=M["index"];window.SLSQR={make:function(t,l){var q=new QRCode(-1,l==nu
       x.fillText('CONFIRMED  ·  ' + String((o.rows[0] || [])[1] || '').toUpperCase(), W / 2, heroH + 80);
       var yy = heroH + 80 + 78; x.fillStyle = '#16332B'; x.font = 'bold 62px Georgia,serif';
       venueLines.forEach(function (l) { x.fillText(l, W / 2, yy); yy += 74; });
-      yy += 10; x.textAlign = 'left';
+      yy += 20; x.textAlign = 'left';
+      x.fillStyle = '#EEF3EF'; var gh = 40 + guestLines.length * 60 + 52; x.fillRect(pad, yy, W - pad * 2, gh); x.fillStyle = '#A9812E'; x.fillRect(pad, yy, 8, gh);
+      x.fillStyle = '#16332B'; x.font = 'bold 50px Georgia,serif'; var gy = yy + 30; guestLines.forEach(function (l) { gy += 60; x.fillText(l, pad + 36, gy - 8); });
+      x.fillStyle = '#2A2A26'; x.font = 'bold 36px Arial,sans-serif'; x.fillText((o.room ? 'Room ' + o.room + '     ' : '') + o.dateLine, pad + 36, gy + 40);
+      yy += gh + 40;
       blocks.forEach(function (b) {
         x.fillStyle = '#C9A24D'; x.fillRect(pad, yy - 6, W - pad * 2, 2); yy += 36;
         x.fillStyle = '#6B675E'; x.font = '600 24px Arial,sans-serif'; x.fillText(b.k.toUpperCase(), pad, yy); yy += 14;
         x.fillStyle = '#2A2A26'; x.font = '600 38px Arial,sans-serif';
         b.ls.forEach(function (l) { yy += 50; x.fillText(l, pad, yy); }); yy += 34 - 10;
       });
-      x.textAlign = 'center'; x.fillStyle = '#16332B'; x.font = 'italic 40px Georgia,serif'; x.fillText(o.wish, W / 2, total - 110);
-      x.fillStyle = '#6B675E'; x.font = '28px Arial,sans-serif'; x.fillText('Concierge  ·  +65 6213 4482  ·  ext 7210  ·  SLSConcierge@shangri-la.com', W / 2, total - 60);
+      x.textAlign = 'center'; x.fillStyle = '#16332B'; x.font = 'italic 40px Georgia,serif'; x.fillText(o.wish, W / 2, total - 140);
+      x.fillStyle = '#6B675E'; x.font = '28px Arial,sans-serif'; x.fillText('In-room: dial 7210   ·   Outside: +65 6213 4482', W / 2, total - 78); x.fillText('slsconcierge@shangri-la.com', W / 2, total - 40);
       c.toBlob(function (blob) { showPicture(c.toDataURL('image/png'), blob, g); }, 'image/png');
     }
     if (g.logo) { var im = new Image(); im.onload = function () { body(im); }; im.onerror = function () { body(null); }; im.src = g.logo; } else body(null);
