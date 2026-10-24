@@ -29,7 +29,7 @@ def conv(path,num):
             out.append(f'<h4 class="item" id="{nid()}">{m2.group(1)}</h4>'); continue
         out.append(blk.replace('<br />','<br/>'))
     r='\n'.join(out)
-    # The Compass Book no longer carries the 'Previously Featured / Still Recommended' list: those venues live in Concierge Quick Reference.
+    # The Compass Book no longer carries the 'Previously Featured / Still Recommended' list: those venues live in Concierge Directory.
     r=re.sub(r'<h3 class="sec" data-sec="Previously Featured[^>]*>.*?(?=<h3 class="sec"|$)','',r,flags=re.S)
     r=re.sub(r'<h3 class="sec" data-sec="Unique Locations[^>]*>.*?</ul>\n?','',r,count=1,flags=re.S)
     return r
