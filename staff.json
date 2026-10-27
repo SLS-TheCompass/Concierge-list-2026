@@ -1,6 +1,7 @@
 {
   "note": "Approved Staff IDs for The Compass. Managed from the Staff Access screen; please do not edit by hand.",
   "ids": [
+    "SLS085837",
     "SLS086975",
     "SLS104398",
     "SLS130938",
@@ -93,5 +94,5 @@
     "SLS206917",
     "SLS382002"
   ],
-  "updated": "2026-10-27T01:35:19.000Z"
+  "updated": "2026-10-27T01:36:51.000Z"
 }
