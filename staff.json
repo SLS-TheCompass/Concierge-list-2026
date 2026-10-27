@@ -94,7 +94,7 @@
     "SLS206917",
     "SLS382002"
   ],
-  "updated": "2026-10-27T02:19:08.000Z",
+  "updated": "2026-10-27T02:25:19.000Z",
   "depts": {
     "SLS206402": "Horizon Club",
     "SLS206049": "Tower Wing Front Office",
@@ -165,6 +165,28 @@
     "SLS206750": "VW-FO Intern",
     "SLS206866": "VW-FO Intern",
     "SLS206861": "VW Intern",
-    "SLS206748": "VW Intern"
+    "SLS206748": "VW Intern",
+    "SLS086975": "Concierge",
+    "SLS104398": "Concierge",
+    "SLS156215": "Concierge",
+    "SLS156241": "Concierge",
+    "SLS168781": "Concierge",
+    "SLS184002": "Concierge",
+    "SLS205229": "Concierge",
+    "SLS205300": "Concierge",
+    "SLS205352": "Concierge",
+    "SLS205582": "Concierge",
+    "SLS205691": "Concierge",
+    "SLS205692": "Concierge",
+    "SLS205699": "Concierge",
+    "SLS205714": "Concierge",
+    "SLS205903": "Concierge",
+    "SLS205914": "Concierge",
+    "SLS206087": "Concierge",
+    "SLS206404": "Concierge",
+    "SLS206472": "Concierge",
+    "SLS206537": "Concierge",
+    "SLS206538": "Concierge",
+    "SLS382002": "Concierge"
   }
 }
