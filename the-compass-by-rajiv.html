@@ -1624,6 +1624,8 @@ body.has-az #results{ padding-right:22px; }
       <input type="text" id="aId" placeholder="SLS154385" autocomplete="off" autocapitalize="characters" spellcheck="false">
       <label for="aName">Name (optional, kept on this phone only)</label>
       <input type="text" id="aName" placeholder="e.g. Rajiv Sharma" autocomplete="off">
+      <label for="aDept">DEPARTMENT (OPTIONAL)</label>
+      <select id="aDept"><option value="">Not set</option><option>Horizon Club</option><option>Tower Wing Front Office</option><option>Valley Wing Front Office &amp; Butlers</option><option>VW-FO Intern</option><option>VW Intern</option></select>
       <label for="aType">Role</label>
       <select id="aType"><option value="">Team member (no end date)</option><option value="Trainee">Trainee</option><option value="Intern">Intern</option><option value="Temporary">Temporary</option></select>
       <div id="aUntilWrap" style="display:none;">
@@ -4420,7 +4422,8 @@ window.__bookInfo = { count: 0, latest: null, error: false };
 (function () {
   var MASTER = window.__MASTER_ID__;
   var TOKEN_KEY = 'sls_admin_pat_v1', NAMES_KEY = 'sls_admin_names_v1', FILE = 'staff.json';
-  var state = { ids: null, roles: {}, sha: null, busy: false };
+  var state = { ids: null, roles: {}, depts: {}, sha: null, busy: false };
+  var DEPTS = ['Horizon Club', 'Tower Wing Front Office', 'Valley Wing Front Office & Butlers', 'VW-FO Intern', 'VW Intern'];
   function $(id) { return document.getElementById(id); }
   function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
@@ -4515,7 +4518,7 @@ window.__bookInfo = { count: 0, latest: null, error: false };
     return gh('GET').then(function (r) {
       setBusy(false);
       if (r.status === 200) {
-        try { var j = JSON.parse(dec(r.data.content)); state.ids = Array.isArray(j.ids) ? j.ids.filter(function (x) { return x && x !== MASTER; }) : []; state.roles = (j.roles && typeof j.roles === 'object') ? j.roles : {}; }
+        try { var j = JSON.parse(dec(r.data.content)); state.ids = Array.isArray(j.ids) ? j.ids.filter(function (x) { return x && x !== MASTER; }) : []; state.roles = (j.roles && typeof j.roles === 'object') ? j.roles : {}; state.depts = (j.depts && typeof j.depts === 'object') ? j.depts : {}; }
         catch (e) { msg('The staff list file could not be read.', 'err'); return; }
         state.sha = r.data.sha; panels('main'); render(); return;
       }
@@ -4525,14 +4528,17 @@ window.__bookInfo = { count: 0, latest: null, error: false };
     }).catch(function () { setBusy(false); msg('Could not reach GitHub. Check your connection and try again.', 'err'); });
   }
 
-  function save(ids, message, roles) {
+  function save(ids, message, roles, depts) {
     if (state.busy) return Promise.resolve(false);
     setBusy(true);
     var clean = Array.from(new Set(ids.filter(function (x) { return x && x !== MASTER; }))).sort();
     var src = roles || state.roles || {}, cleanRoles = {};
     clean.forEach(function (id) { if (src[id] && src[id].t) cleanRoles[id] = src[id]; });
+    var dsrc = depts || state.depts || {}, cleanDepts = {};
+    clean.forEach(function (id) { if (dsrc[id]) cleanDepts[id] = dsrc[id]; });
     var out = { note: 'Approved Staff IDs for The Compass. Managed from the Staff Access screen; please do not edit by hand.', ids: clean };
     if (Object.keys(cleanRoles).length) out.roles = cleanRoles;
+    if (Object.keys(cleanDepts).length) out.depts = cleanDepts;
     out.updated = new Date().toISOString();
     var content = JSON.stringify(out, null, 2) + '\n';
     var who = { name: 'SLS Compass Admin', email: 'noreply@users.noreply.github.com' };
@@ -4540,7 +4546,7 @@ window.__bookInfo = { count: 0, latest: null, error: false };
     if (state.sha) body.sha = state.sha;
     return gh('PUT', body).then(function (r) {
       setBusy(false);
-      if (r.ok) { state.ids = clean; state.roles = cleanRoles; state.sha = r.data.content.sha; panels('main'); render(); return true; }
+      if (r.ok) { state.ids = clean; state.roles = cleanRoles; state.depts = cleanDepts; state.sha = r.data.content.sha; panels('main'); render(); return true; }
       if (r.status === 409 || r.status === 422) { loadList().then(function () { msg('The list was changed somewhere else, so I reloaded it. Nothing was lost. Please try again.', 'err'); }); return false; }
       if (refuse(r)) return false;
       msg('The save failed (error ' + r.status + '). Nothing was changed.', 'err'); return false;
@@ -4574,6 +4580,7 @@ window.__bookInfo = { count: 0, latest: null, error: false };
       '<div class="dl"><b>Staff ID</b> ' + esc(id) + '</div>' +
       '<div class="dl"><b>Name</b> ' + esc(names[id] || 'Not saved on this phone') + '</div>' +
       '<div class="dl"><b>Status</b> ' + esc(head) + '</div>' +
+      '<div class="acts setrole"><b style="font-size:13px;color:var(--ink-soft);">Department</b><select data-dsel="' + esc(id) + '"><option value="">Not set</option>' + DEPTS.map(function (d) { return '<option' + (state.depts[id] === d ? ' selected' : '') + '>' + esc(d) + '</option>'; }).join('') + '</select><button class="btn secondary sm" data-dp="' + esc(id) + '">Save</button></div>' +
       acts + '<div class="acts"><button class="btn danger sm" data-rm="' + esc(id) + '">Remove</button></div></div>';
     return '<div class="row wrap rowx"><div class="who tap" data-open="' + esc(id) + '" role="button" tabindex="0"><div class="id">' + esc(id) + (r && r.t ? ' <span class="pill' + (r.u && daysLeft(r.u) < 0 ? ' end' : '') + '">' + esc(r.t.toUpperCase()) + '</span>' : '') + ' <span class="chev">' + (isOpen ? '▾' : '▸') + '</span></div>' + (names[id] ? '<div class="nm">' + esc(names[id]) + '</div>' : '') + life + '</div>' + det + '</div>';
   }
@@ -4582,13 +4589,15 @@ window.__bookInfo = { count: 0, latest: null, error: false };
     var names = getNames(), ids = state.ids || [];
     $('aCount').textContent = 'Approved staff (' + (ids.length + 1) + ')';
     var html = '<div class="row"><div class="who"><div class="id">' + MASTER + '</div><div class="nm">' + esc(names[MASTER] || 'You') + '</div></div><span class="tag">MASTER · always has access</span></div>';
-    var active = [], ended = [];
-    ids.forEach(function (id) { var r = state.roles[id]; (r && r.u && daysLeft(r.u) < 0 ? ended : active).push(id); });
-    active.forEach(function (id) { html += rowHtml(id, names); });
-    if (ended.length) {
-      html += '<div class="sub-h">Ended (' + ended.length + ') · locked out; extend to give access back</div>';
-      ended.forEach(function (id) { html += rowHtml(id, names); });
-    }
+    var groups = {}, order = DEPTS.slice();
+    ids.forEach(function (id) { var d = state.depts[id] || ''; if (d && order.indexOf(d) < 0) order.push(d); (groups[d] = groups[d] || []).push(id); });
+    order.push('');
+    order.forEach(function (d) {
+      var g = groups[d]; if (!g || !g.length) return;
+      g.sort(function (x, y) { var ex = state.roles[x] && state.roles[x].u && daysLeft(state.roles[x].u) < 0, ey = state.roles[y] && state.roles[y].u && daysLeft(state.roles[y].u) < 0; return (ex ? 1 : 0) - (ey ? 1 : 0); });
+      html += '<div class="sub-h">' + esc(d || 'No department set') + ' (' + g.length + ')</div>';
+      g.forEach(function (id) { html += rowHtml(id, names); });
+    });
     $('aList').innerHTML = html;
     var rms = $('aList').querySelectorAll('[data-rm]');
     for (var i = 0; i < rms.length; i++) rms[i].addEventListener('click', onRemove);
@@ -4597,6 +4606,12 @@ window.__bookInfo = { count: 0, latest: null, error: false };
     var ops = $('aList').querySelectorAll('[data-open]');
     for (var q = 0; q < ops.length; q++) ops[q].addEventListener('click', function (ev) {
       var id = ev.currentTarget.getAttribute('data-open'); openRows[id] = !openRows[id]; render();
+    });
+    var dps = $('aList').querySelectorAll('[data-dp]');
+    for (var d = 0; d < dps.length; d++) dps[d].addEventListener('click', function (ev) {
+      var id = ev.currentTarget.getAttribute('data-dp'), sel = $('aList').querySelector('[data-dsel="' + id + '"]');
+      var ds = JSON.parse(JSON.stringify(state.depts || {})); if (sel && sel.value) ds[id] = sel.value; else delete ds[id];
+      save(state.ids || [], 'Staff access: department ' + id, null, ds).then(function (ok) { if (ok) msg(label(id) + ' is now under ' + (ds[id] || 'no department') + '.', 'ok'); });
     });
     var srs = $('aList').querySelectorAll('[data-sr]');
     for (var m = 0; m < srs.length; m++) srs[m].addEventListener('click', onSetRole);
@@ -4636,7 +4651,8 @@ window.__bookInfo = { count: 0, latest: null, error: false };
       if (until < todayIso()) { msg('That end date has already passed.', 'err'); return; }
       roles[id] = { t: role, u: until };
     }
-    save((state.ids || []).concat([id]), 'Staff access: add ' + id, roles).then(function (ok) {
+    var dsx = JSON.parse(JSON.stringify(state.depts || {})); if ($('aDept').value) dsx[id] = $('aDept').value;
+    save((state.ids || []).concat([id]), 'Staff access: add ' + id, roles, dsx).then(function (ok) {
       if (!ok) return;
       if (name) { var n = getNames(); n[id] = name; setNames(n); render(); }
       announceNewStaff(id, name);
