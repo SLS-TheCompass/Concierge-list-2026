@@ -1,0 +1,15 @@
+{
+ "updated": "2026-10-28T23:20:00+08:00",
+ "waiting": [
+  {"t": "Dishes review for approval", "d": "Michelin and Bib Excel sent. Nothing is in the app until you approve."},
+  {"t": "Weekly edition day and time", "d": "Needed to set the calendar reminder."},
+  {"t": "Attractions and Shopping lists", "d": "Verified lists in the pending Excel for your review."}
+ ],
+ "pending": [
+  {"id": "mich", "t": "Michelin dishes remainder", "d": "Les Amis, Candlenut, Alaturka, Nouri, Shinji, KOMA, Tim Ho Wan, Whole Earth, Lei Garden"},
+  {"id": "groups", "t": "Dishes: In-House, Sister Property, Restaurant, Local Food", "d": "Not started"},
+  {"id": "lobe", "t": "Lo & Behold hours", "d": "Waiting on confirmation"},
+  {"id": "card", "t": "Card guarantee updates", "d": "List ready"},
+  {"id": "ed18", "t": "Edition 018", "d": "In the pending list"}
+ ]
+}
