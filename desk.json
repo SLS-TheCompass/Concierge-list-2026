@@ -1,15 +1,129 @@
 {
  "updated": "2026-10-28T23:20:00+08:00",
  "waiting": [
-  {"t": "Dishes review for approval", "d": "Michelin and Bib Excel sent. Nothing is in the app until you approve."},
-  {"t": "Weekly edition day and time", "d": "Needed to set the calendar reminder."},
-  {"t": "Attractions and Shopping lists", "d": "Verified lists in the pending Excel for your review."}
+  {
+   "t": "Dishes review for approval",
+   "d": "Michelin and Bib Excel sent. Nothing is in the app until you approve.",
+   "look": "Open the Michelin and Bib Excel. For each restaurant check the dish names and spelling. Reply approved, or give the corrections.",
+   "where": "Michelin and Bib Excel (sent to you)",
+   "prio": "High",
+   "need": "Your approval, or corrections, on the dishes in the Michelin and Bib Excel.",
+   "steps": [
+    "Open the Michelin and Bib Excel I sent you.",
+    "Check each restaurant's dish names and spelling.",
+    "Reply approved, or list the corrections."
+   ],
+   "changed": "2026-10-28",
+   "hist": "Open at the last check, 28 Oct 2026."
+  },
+  {
+   "t": "Weekly edition day and time",
+   "d": "Needed to set the calendar reminder.",
+   "look": "Tell me the day and time you want each new weekly edition prepared.",
+   "where": "Reply in the chat",
+   "prio": "High",
+   "need": "The day and time you want each new weekly edition prepared.",
+   "steps": [
+    "Decide the day and time.",
+    "Tell me in the chat so I can set the calendar reminder."
+   ],
+   "changed": "2026-10-28",
+   "hist": "Open at the last check, 28 Oct 2026."
+  },
+  {
+   "t": "Attractions and Shopping lists",
+   "d": "Verified lists in the pending Excel for your review.",
+   "look": "Check each venue's name, address and opening hours. Tell me which ones you approve for the app.",
+   "where": "Pending Excel: Attractions and Shopping sheets",
+   "prio": "Medium",
+   "need": "Your decision on which venues go into the app.",
+   "steps": [
+    "Open the pending Excel and go to the Attractions and Shopping sheets.",
+    "Check each venue's name, address and opening hours.",
+    "Tell me which ones you approve."
+   ],
+   "changed": "2026-10-28",
+   "hist": "Open at the last check, 28 Oct 2026."
+  }
  ],
  "pending": [
-  {"id": "mich", "t": "Michelin dishes remainder", "d": "Les Amis, Candlenut, Alaturka, Nouri, Shinji, KOMA, Tim Ho Wan, Whole Earth, Lei Garden"},
-  {"id": "groups", "t": "Dishes: In-House, Sister Property, Restaurant, Local Food", "d": "Not started"},
-  {"id": "lobe", "t": "Lo & Behold hours", "d": "Waiting on confirmation"},
-  {"id": "card", "t": "Card guarantee updates", "d": "List ready"},
-  {"id": "ed18", "t": "Edition 018", "d": "In the pending list"}
+  {
+   "id": "mich",
+   "t": "Michelin dishes remainder",
+   "d": "Les Amis, Candlenut, Alaturka, Nouri, Shinji, KOMA, Tim Ho Wan, Whole Earth, Lei Garden",
+   "look": "Dishes still to confirm for the nine restaurants named. Each needs a 2026 source before it goes in.",
+   "where": "Michelin dishes list",
+   "prio": "Medium",
+   "need": "Nothing yet. The dishes come to you for approval once each has a 2026 source.",
+   "steps": [
+    "Find each restaurant's dishes from the Michelin Guide or its own website.",
+    "Check that every dish has a 2026 source.",
+    "Send the dishes to you for approval."
+   ],
+   "changed": "2026-10-28",
+   "hist": "Open at the last check, 28 Oct 2026."
+  },
+  {
+   "id": "groups",
+   "t": "Dishes: In-House, Sister Property, Restaurant, Local Food",
+   "d": "Not started",
+   "look": "Signature dishes for In-House, Sister Property, Restaurant and Local Food venues. Not started.",
+   "where": "Dishes review sheet, once prepared",
+   "prio": "Low",
+   "need": "Nothing yet. This has not been started.",
+   "steps": [
+    "Prepare the signature dishes for each of the four groups.",
+    "Send them to you for approval before anything is added."
+   ],
+   "changed": "2026-10-28",
+   "hist": "Open at the last check, 28 Oct 2026."
+  },
+  {
+   "id": "lobe",
+   "t": "Lo & Behold hours",
+   "d": "Waiting on confirmation",
+   "look": "Opening hours for the Lo & Behold venues. Confirm with the venues before anything changes in the app.",
+   "where": "Dining tile: Lo & Behold venues",
+   "prio": "Medium",
+   "need": "Confirmation of the opening hours from the venues.",
+   "steps": [
+    "Check each Lo & Behold venue's current opening hours with the venue.",
+    "Compare them with the hours in the Dining tile.",
+    "Update the app only after you approve."
+   ],
+   "changed": "2026-10-28",
+   "hist": "Open at the last check, 28 Oct 2026."
+  },
+  {
+   "id": "card",
+   "t": "Card guarantee updates",
+   "d": "List ready",
+   "look": "Which venues need a card guarantee for reservations. The list is ready to apply once you approve it.",
+   "where": "Card guarantee list",
+   "prio": "Medium",
+   "need": "Your approval to apply the card guarantee list.",
+   "steps": [
+    "Review the prepared list.",
+    "Tell me \"go\" and I add it to the app."
+   ],
+   "changed": "2026-10-28",
+   "hist": "Open at the last check, 28 Oct 2026."
+  },
+  {
+   "id": "ed18",
+   "t": "Edition 018",
+   "d": "In the pending list",
+   "look": "The next weekly edition is in the pending list. Review it before it goes into the Compass Book.",
+   "where": "Edition 018 file",
+   "prio": "High",
+   "need": "Your read-through of Edition 018.",
+   "steps": [
+    "Open the Edition 018 draft.",
+    "Check the dates, venues and wording.",
+    "Tell me \"go\" to add it to the Compass Book and publish."
+   ],
+   "changed": "2026-10-28",
+   "hist": "Open at the last check, 28 Oct 2026."
+  }
  ]
 }
