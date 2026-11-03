@@ -14,7 +14,8 @@
     "Reply approved, or list the corrections."
    ],
    "changed": "2026-10-28",
-   "hist": "Open at the last check, 28 Oct 2026."
+   "hist": "Open at the last check, 28 Oct 2026.",
+   "approve": true
   },
   {
    "t": "Weekly edition day and time",
@@ -43,7 +44,8 @@
     "Tell me which ones you approve."
    ],
    "changed": "2026-10-28",
-   "hist": "Open at the last check, 28 Oct 2026."
+   "hist": "Open at the last check, 28 Oct 2026.",
+   "approve": true
   }
  ],
  "pending": [
@@ -61,7 +63,8 @@
     "Send the dishes to you for approval."
    ],
    "changed": "2026-10-28",
-   "hist": "Open at the last check, 28 Oct 2026."
+   "hist": "Open at the last check, 28 Oct 2026.",
+   "approve": true
   },
   {
    "id": "groups",
@@ -76,7 +79,8 @@
     "Send them to you for approval before anything is added."
    ],
    "changed": "2026-10-28",
-   "hist": "Open at the last check, 28 Oct 2026."
+   "hist": "Open at the last check, 28 Oct 2026.",
+   "approve": true
   },
   {
    "id": "lobe",
@@ -92,7 +96,8 @@
     "Update the app only after you approve."
    ],
    "changed": "2026-10-28",
-   "hist": "Open at the last check, 28 Oct 2026."
+   "hist": "Open at the last check, 28 Oct 2026.",
+   "approve": true
   },
   {
    "id": "card",
@@ -107,23 +112,25 @@
     "Tell me \"go\" and I add it to the app."
    ],
    "changed": "2026-10-28",
-   "hist": "Open at the last check, 28 Oct 2026."
+   "hist": "Open at the last check, 28 Oct 2026.",
+   "approve": true
   },
   {
    "id": "ed18",
    "t": "Edition 018",
-   "d": "In the pending list",
+   "d": "Draft for 2 to 8 November is being prepared. The Read draft and Publish buttons appear here once it is attached.",
    "look": "The next weekly edition is in the pending list. Review it before it goes into the Compass Book.",
    "where": "Edition 018 file",
    "prio": "High",
-   "need": "Your read-through of Edition 018.",
+   "need": "Your read-through once the draft is attached.",
    "steps": [
-    "Open the Edition 018 draft.",
-    "Check the dates, venues and wording.",
-    "Tell me \"go\" to add it to the Compass Book and publish."
+    "Wait for the draft to be attached here.",
+    "Tap Read draft and go through it.",
+    "Tap Publish edition, or Send back for changes with a note."
    ],
    "changed": "2026-10-28",
-   "hist": "Open at the last check, 28 Oct 2026."
+   "hist": "Open at the last check, 28 Oct 2026.",
+   "approve": true
   }
  ]
 }
