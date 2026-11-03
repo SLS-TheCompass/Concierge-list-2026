@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03T13:55:00+08:00",
+ "updated": "2026-11-03T15:40:00+08:00",
  "waiting": [
   {
    "t": "Dishes review for approval",
@@ -116,25 +116,6 @@
    "approve": true
   },
   {
-   "id": "ed18",
-   "t": "Edition 018",
-   "d": "Draft for Monday 2 to Sunday 8 November 2026 is ready. Tap Read draft to go through it, then Publish edition, or Send back for changes with a note.",
-   "look": "The next weekly edition is in the pending list. Review it before it goes into the Compass Book.",
-   "where": "Edition 018 file",
-   "prio": "High",
-   "need": "Your read-through, and a check of the items in the message from Claude.",
-   "steps": [
-    "Tap Read draft and go through it.",
-    "Tap Publish edition to add it to the Compass Book, or Send back for changes with a note."
-   ],
-   "changed": "2026-11-03",
-   "hist": "Draft attached 3 Nov 2026.",
-   "approve": true,
-   "draft": {
-    "file": "desk-drafts/edition-018.json"
-   }
-  },
-  {
    "id": "cb-load",
    "t": "Compass Book: load one edition at a time, Archive, search",
    "d": "Keeps the Compass Book fast as editions are added.",
@@ -147,24 +128,6 @@
     "Build the index, per-edition files, Archive and search.",
     "Show you a preview.",
     "Publish only after you say publish."
-   ],
-   "changed": "2026-11-03",
-   "added": "2026-11-03",
-   "hist": "Added 3 Nov 2026.",
-   "approve": true
-  },
-  {
-   "id": "cb-expire",
-   "t": "Compass Book: expired items and Continuing shortcuts",
-   "d": "Optional, after the loading change.",
-   "look": "Grey out or hide ended events, closures and promotions in older editions. For items that carry across weeks, such as exhibitions, link back to the first write-up instead of repeating it. Permanent venues already live in the Concierge Directory.",
-   "where": "Compass Book",
-   "prio": "Low",
-   "need": "Your decision on whether you want this after the loading change.",
-   "steps": [
-    "Decide if you want it.",
-    "I mark ended items and add the Continuing links.",
-    "Show you a preview before publishing."
    ],
    "changed": "2026-11-03",
    "added": "2026-11-03",
