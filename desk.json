@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03T12:00:00+08:00",
+ "updated": "2026-11-03T13:55:00+08:00",
  "waiting": [
   {
    "t": "Dishes review for approval",
@@ -133,6 +133,43 @@
    "draft": {
     "file": "desk-drafts/edition-018.json"
    }
+  },
+  {
+   "id": "cb-load",
+   "t": "Compass Book: load one edition at a time, Archive, search",
+   "d": "Keeps the Compass Book fast as editions are added.",
+   "look": "Today all editions sit in one file (about 315 KB for 18 editions, growing about 17 KB a week). Plan: a small index file, each edition in its own file loaded on tap, the latest 4 to 6 editions shown with older ones under Archive, and one search across all editions.",
+   "where": "Compass Book",
+   "prio": "Medium",
+   "need": "Your go-ahead. I check how the app loads the book first, then show you a preview before anything is published.",
+   "steps": [
+    "Check how the app loads the book today.",
+    "Build the index, per-edition files, Archive and search.",
+    "Show you a preview.",
+    "Publish only after you say publish."
+   ],
+   "changed": "2026-11-03",
+   "added": "2026-11-03",
+   "hist": "Added 3 Nov 2026.",
+   "approve": true
+  },
+  {
+   "id": "cb-expire",
+   "t": "Compass Book: expired items and Continuing shortcuts",
+   "d": "Optional, after the loading change.",
+   "look": "Grey out or hide ended events, closures and promotions in older editions. For items that carry across weeks, such as exhibitions, link back to the first write-up instead of repeating it. Permanent venues already live in the Concierge Directory.",
+   "where": "Compass Book",
+   "prio": "Low",
+   "need": "Your decision on whether you want this after the loading change.",
+   "steps": [
+    "Decide if you want it.",
+    "I mark ended items and add the Continuing links.",
+    "Show you a preview before publishing."
+   ],
+   "changed": "2026-11-03",
+   "added": "2026-11-03",
+   "hist": "Added 3 Nov 2026.",
+   "approve": true
   }
  ]
 }
