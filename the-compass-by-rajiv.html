@@ -4783,7 +4783,7 @@ if (document.fonts && document.fonts.ready) {
   }
   function desc(it) {
     const a = ATT[it.name]; if (a && a[3]) return a[3];
-    const t = String(it.notes || '').replace(/[​-‏⁠﻿]/g, '');
+    const t = String(it.notes || '').replace(/[\u200b-\u200f\u2060\ufeff]/g, '');
     return t.split(/(?<=\.)\s+/).filter(function (x) { return !/wheelchair|stroller|@|ticket pre|reservation|dress/i.test(x); }).slice(0, 2).join(' ');
   }
   function eligible(it, o) {
