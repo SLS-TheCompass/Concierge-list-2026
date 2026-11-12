@@ -1,0 +1,1316 @@
+{
+"note": "Compass Book index. Each edition is in its own file; search.json holds the text for searching.",
+"updated": "2026-11-03",
+"editions": [
+{
+"num": "001",
+"range": "29 Jun – 5 Jul 2026",
+"heads": [
+"FIFA World Cup 2026 – Round of 32 & Round of 16",
+"Singapore International Piano Festival",
+"Milli: Sky Dining, Bar & Lounge"
+],
+"sections": [
+{
+"id": "e001-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e001-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e001-5",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e001-8",
+"cat": "Attractions",
+"label": "Attractions & Activities"
+},
+{
+"id": "e001-11",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e001-15",
+"cat": "Entertainment",
+"label": "Concerts, Theatre & Entertainment"
+},
+{
+"id": "e001-17",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e001-21",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e001-25",
+"cat": "Other",
+"label": "Looking Ahead"
+},
+{
+"id": "e001-27",
+"cat": "Other",
+"label": "Additional Information"
+},
+{
+"id": "e001-28",
+"cat": "Other",
+"label": "Concierge Notes"
+},
+{
+"id": "e001-29",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e001-34",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed001.json"
+},
+{
+"num": "002",
+"range": "6 Jul – 12 Jul 2026",
+"heads": [
+"FIFA World Cup 2026 – Round of 16 & Quarterfinals",
+"Bibim Deli",
+"Sukiyaki Jin"
+],
+"sections": [
+{
+"id": "e002-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e002-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e002-5",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e002-7",
+"cat": "Attractions",
+"label": "Attractions & Activities"
+},
+{
+"id": "e002-10",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e002-13",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e002-15",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e002-19",
+"cat": "Other",
+"label": "Looking Ahead"
+},
+{
+"id": "e002-21",
+"cat": "Other",
+"label": "Additional Information"
+},
+{
+"id": "e002-22",
+"cat": "Other",
+"label": "Concierge Notes"
+},
+{
+"id": "e002-23",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e002-28",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed002.json"
+},
+{
+"num": "003",
+"range": "13 Jul – 19 Jul 2026",
+"heads": [
+"FIFA World Cup 2026 – Semifinals, Bronze Final & Final",
+"Tiffany & Co. Blue Box Cafe"
+],
+"sections": [
+{
+"id": "e003-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e003-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e003-5",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e003-7",
+"cat": "Attractions",
+"label": "Attractions & Activities"
+},
+{
+"id": "e003-9",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e003-11",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e003-14",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e003-18",
+"cat": "Other",
+"label": "Looking Ahead"
+},
+{
+"id": "e003-20",
+"cat": "Other",
+"label": "Additional Information"
+},
+{
+"id": "e003-21",
+"cat": "Other",
+"label": "Concierge Notes"
+},
+{
+"id": "e003-22",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e003-27",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed003.json"
+},
+{
+"num": "004",
+"range": "20 Jul – 26 Jul 2026",
+"heads": [
+"Sentosa GrillFest",
+"F1 Exhibition Singapore",
+"A Magical Island Adventure at Sentosa"
+],
+"sections": [
+{
+"id": "e004-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e004-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e004-5",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e004-11",
+"cat": "Attractions",
+"label": "Attractions & Activities"
+},
+{
+"id": "e004-16",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e004-22",
+"cat": "Entertainment",
+"label": "Concerts, Theatre & Entertainment"
+},
+{
+"id": "e004-26",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e004-30",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e004-36",
+"cat": "Other",
+"label": "Looking Ahead"
+},
+{
+"id": "e004-40",
+"cat": "Other",
+"label": "Additional Information"
+},
+{
+"id": "e004-41",
+"cat": "Other",
+"label": "Concierge Notes"
+},
+{
+"id": "e004-42",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e004-47",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed004.json"
+},
+{
+"num": "005",
+"range": "27 Jul – 2 Aug 2026",
+"heads": [
+"Sentosa GrillFest",
+"F1 Exhibition Singapore",
+"Bouillon Gavroche"
+],
+"sections": [
+{
+"id": "e005-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e005-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e005-5",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e005-6",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e005-9",
+"cat": "Attractions",
+"label": "Attractions & Activities"
+},
+{
+"id": "e005-13",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e005-15",
+"cat": "Special Mention",
+"label": "Special Mention: From Shangri-La's Restaurant Recommendation List"
+},
+{
+"id": "e005-18",
+"cat": "Entertainment",
+"label": "Concerts, Theatre & Entertainment"
+},
+{
+"id": "e005-21",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e005-23",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e005-29",
+"cat": "Other",
+"label": "Looking Ahead"
+},
+{
+"id": "e005-33",
+"cat": "Other",
+"label": "Additional Information"
+},
+{
+"id": "e005-34",
+"cat": "Other",
+"label": "Concierge Notes"
+},
+{
+"id": "e005-35",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e005-41",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed005.json"
+},
+{
+"num": "006",
+"range": "3 Aug – 9 Aug 2026",
+"heads": [
+"National Day Parade 2026",
+"Sentosa GrillFest – Closing Soon",
+"Hi Stranger"
+],
+"sections": [
+{
+"id": "e006-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e006-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e006-4",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e006-6",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e006-9",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e006-11",
+"cat": "Special Mention",
+"label": "Special Mention: From Shangri-La's Restaurant Recommendation List"
+},
+{
+"id": "e006-14",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e006-16",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e006-20",
+"cat": "Other",
+"label": "Looking Ahead"
+},
+{
+"id": "e006-23",
+"cat": "Other",
+"label": "Additional Information"
+},
+{
+"id": "e006-24",
+"cat": "Other",
+"label": "Concierge Notes"
+},
+{
+"id": "e006-25",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e006-30",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed006.json"
+},
+{
+"num": "007",
+"range": "10 Aug – 16 Aug 2026",
+"heads": [
+"Concours d'Elegance Singapore",
+"Orchard Road Fashion Week",
+"Sentosa GrillFest – Final Weekend"
+],
+"sections": [
+{
+"id": "e007-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e007-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e007-4",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e007-6",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e007-10",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e007-12",
+"cat": "Special Mention",
+"label": "Special Mention: From Shangri-La's Restaurant Recommendation List"
+},
+{
+"id": "e007-15",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e007-16",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e007-21",
+"cat": "Other",
+"label": "Looking Ahead"
+},
+{
+"id": "e007-24",
+"cat": "Other",
+"label": "Additional Information"
+},
+{
+"id": "e007-25",
+"cat": "Other",
+"label": "Concierge Notes"
+},
+{
+"id": "e007-26",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e007-31",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed007.json"
+},
+{
+"num": "008",
+"range": "17 Aug – 23 Aug 2026",
+"heads": [
+"Singapore Night Festival 2026",
+"POP TOY SHOW (PTS) Singapore",
+"Singapore Gallery Month 2026"
+],
+"sections": [
+{
+"id": "e008-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e008-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e008-4",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e008-6",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e008-10",
+"cat": "Attractions",
+"label": "Attractions & Activities"
+},
+{
+"id": "e008-13",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e008-15",
+"cat": "Special Mention",
+"label": "Special Mention: From Shangri-La's Restaurant Recommendation List"
+},
+{
+"id": "e008-18",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e008-19",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e008-25",
+"cat": "Other",
+"label": "Looking Ahead"
+},
+{
+"id": "e008-28",
+"cat": "Other",
+"label": "Additional Information"
+},
+{
+"id": "e008-29",
+"cat": "Other",
+"label": "Concierge Notes"
+},
+{
+"id": "e008-30",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e008-35",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed008.json"
+},
+{
+"num": "009",
+"range": "24 Aug – 30 Aug 2026",
+"heads": [
+"GREEN-HOUSE Festival",
+"Singapore Night Festival – Second Weekend",
+"Village Encounters @ Holland Village"
+],
+"sections": [
+{
+"id": "e009-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e009-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e009-4",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e009-6",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e009-12",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e009-13",
+"cat": "Special Mention",
+"label": "Special Mention: From Shangri-La's Restaurant Recommendation List"
+},
+{
+"id": "e009-16",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e009-17",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e009-23",
+"cat": "Other",
+"label": "Looking Ahead"
+},
+{
+"id": "e009-26",
+"cat": "Other",
+"label": "Additional Information"
+},
+{
+"id": "e009-27",
+"cat": "Other",
+"label": "Concierge Notes"
+},
+{
+"id": "e009-28",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e009-33",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed009.json"
+},
+{
+"num": "010",
+"range": "31 Aug – 6 Sep 2026",
+"heads": [
+"Another Coffee Festival 2026",
+"SLA25 Rediscovery Trail",
+"Peppa Pig Fun Day Out! – Singapore Debut"
+],
+"sections": [
+{
+"id": "e010-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e010-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e010-4",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e010-6",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e010-11",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e010-13",
+"cat": "Special Mention",
+"label": "Special Mention: From Shangri-La's Restaurant Recommendation List"
+},
+{
+"id": "e010-16",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e010-17",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e010-24",
+"cat": "Other",
+"label": "Looking Ahead"
+},
+{
+"id": "e010-27",
+"cat": "Other",
+"label": "Additional Information"
+},
+{
+"id": "e010-28",
+"cat": "Other",
+"label": "Concierge Notes"
+},
+{
+"id": "e010-29",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e010-34",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed010.json"
+},
+{
+"num": "011",
+"range": "7 Sep – 13 Sep 2026",
+"heads": [
+"Singapore River Festival 2026 – The Quay Collective",
+"AL!VE Artisans Market",
+"Singapore Botanic Gardens & Fort Canning Park Heritage Festival"
+],
+"sections": [
+{
+"id": "e011-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e011-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e011-4",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e011-5",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e011-14",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e011-16",
+"cat": "Special Mention",
+"label": "Special Mention: From Shangri-La's Restaurant Recommendation List"
+},
+{
+"id": "e011-19",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e011-21",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e011-26",
+"cat": "Other",
+"label": "Looking Ahead"
+},
+{
+"id": "e011-29",
+"cat": "Other",
+"label": "Additional Information"
+},
+{
+"id": "e011-30",
+"cat": "Other",
+"label": "Concierge Notes"
+},
+{
+"id": "e011-31",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e011-36",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed011.json"
+},
+{
+"num": "012",
+"range": "14 Sep – 20 Sep 2026",
+"heads": [
+"Mid-Autumn Family FUN",
+"VivoCity's Sanrio Moonlit Garden",
+"Osteria Mozza"
+],
+"sections": [
+{
+"id": "e012-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e012-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e012-4",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e012-5",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e012-9",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e012-12",
+"cat": "Special Mention",
+"label": "Special Mention: From Shangri-La's Restaurant Recommendation List"
+},
+{
+"id": "e012-15",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e012-16",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e012-21",
+"cat": "Other",
+"label": "Looking Ahead"
+},
+{
+"id": "e012-24",
+"cat": "Other",
+"label": "Additional Information"
+},
+{
+"id": "e012-25",
+"cat": "Other",
+"label": "Concierge Notes"
+},
+{
+"id": "e012-26",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e012-31",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed012.json"
+},
+{
+"num": "013",
+"range": "21 Sep – 27 Sep 2026",
+"heads": [
+"Singapore Tennis Open (WTA 500)",
+"#RevUpSG – Azerbaijan Grand Prix Screening",
+"Art Remembers – Closing Soon"
+],
+"sections": [
+{
+"id": "e013-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e013-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e013-4",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e013-5",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e013-10",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e013-12",
+"cat": "Special Mention",
+"label": "Special Mention: From Shangri-La's Restaurant Recommendation List"
+},
+{
+"id": "e013-15",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e013-16",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e013-20",
+"cat": "Other",
+"label": "Looking Ahead"
+},
+{
+"id": "e013-22",
+"cat": "Other",
+"label": "Additional Information"
+},
+{
+"id": "e013-23",
+"cat": "Other",
+"label": "Concierge Notes"
+},
+{
+"id": "e013-24",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e013-29",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed013.json"
+},
+{
+"num": "014",
+"range": "28 Sep – 4 Oct 2026",
+"heads": [
+"Grand Prix Season Singapore (GPSS) 2026",
+"Octoburst! 2026",
+"TLM Food Expo"
+],
+"sections": [
+{
+"id": "e014-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e014-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e014-4",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e014-9",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e014-19",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e014-22",
+"cat": "Special Mention",
+"label": "Special Mention: From Shangri-La's Restaurant Recommendation List"
+},
+{
+"id": "e014-25",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e014-26",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e014-27",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e014-31",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed014.json"
+},
+{
+"num": "015",
+"range": "5 Oct – 11 Oct 2026",
+"heads": [
+"Formula 1 Singapore Airlines Singapore Grand Prix 2026",
+"Grand Prix Season Singapore – Race-Week Activations",
+"Amber Lounge Singapore"
+],
+"sections": [
+{
+"id": "e015-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e015-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e015-3",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e015-8",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e015-16",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e015-22",
+"cat": "Special Mention",
+"label": "Special Mention: From Shangri-La's Restaurant Recommendation List"
+},
+{
+"id": "e015-25",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e015-26",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e015-27",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e015-31",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed015.json"
+},
+{
+"num": "016",
+"range": "12 Oct – 18 Oct 2026",
+"heads": [
+"BIGBANG 2026-2027 World Tour <XX: COSMOS>",
+"NCT 127 5th Tour ‘Neo City: The Redline’",
+"Avenged Sevenfold"
+],
+"sections": [
+{
+"id": "e016-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e016-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e016-3",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e016-9",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e016-24",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e016-29",
+"cat": "Special Mention",
+"label": "Special Mention: From Shangri-La’s Restaurant Recommendation List"
+},
+{
+"id": "e016-31",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e016-32",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e016-33",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e016-38",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed016.json"
+},
+{
+"num": "017",
+"range": "19 Oct – 25 Oct 2026",
+"heads": [
+"In the Mood for Love in Concert",
+"ONE OR EIGHT – Special SHOW CASE 2026 in ASIA -V8-",
+"BINI: Signals World Tour 2026"
+],
+"sections": [
+{
+"id": "e017-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e017-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e017-3",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e017-9",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e017-18",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e017-22",
+"cat": "Special Mention",
+"label": "Special Mention: From Shangri-La’s Restaurant Recommendation List"
+},
+{
+"id": "e017-24",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e017-25",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e017-26",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e017-31",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed017.json"
+},
+{
+"num": "018",
+"range": "2 Nov – 8 Nov 2026",
+"heads": [
+"Trevor Noah",
+"LANY: soft world tour",
+"yung kai: Asia Tour 2026"
+],
+"sections": [
+{
+"id": "e018-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e018-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e018-3",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e018-9",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e018-17",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e018-22",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e018-23",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e018-24",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e018-28",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed018.json"
+}
+]
+}
