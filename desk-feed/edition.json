@@ -1,0 +1,21 @@
+{
+ "source": "Weekly edition",
+ "updated": "2026-11-16T02:30:00+08:00",
+ "items": [
+  {
+   "id": "ed19-notes",
+   "t": "Edition 019: points to check",
+   "d": "Published. Two dates and one gap to look at.",
+   "prio": "Low",
+   "need": "Nothing urgent. Confirm the points below when you can.",
+   "look": "Waterfall white truffle start: your draft says 10 Nov, the hotel page says 9 Nov. Promotions taken from Directory records are not freshly verified. No edition covers 9 to 15 Nov, so the numbering has a gap. The 21 Nov Banquets ball is not included.",
+   "where": "Compass Book, Edition 019",
+   "steps": [
+    "Confirm the truffle start date.",
+    "Decide whether the 21 Nov ball should be added."
+   ],
+   "added": "2026-11-16",
+   "changed": "2026-11-16"
+  }
+ ]
+}

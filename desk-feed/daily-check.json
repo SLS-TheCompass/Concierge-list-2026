@@ -1,0 +1,22 @@
+{
+ "source": "Daily check",
+ "updated": "2026-11-16T02:30:00+08:00",
+ "items": [
+  {
+   "id": "dc-20261116",
+   "t": "New venues ready to add (3)",
+   "d": "Chai Chuan Tou Yang Rou Tang, Yong Chun Wan Ton Noodle, Tea Chapter.",
+   "prio": "Medium",
+   "need": "Your go-ahead to add the three venues to the Directory.",
+   "look": "Verified in the 15 Nov daily check. On hold, not ready: 786 Char Kway Teow and Mustafa Centre (details unconfirmed).",
+   "where": "Daily check report, 15 Nov 2026",
+   "steps": [
+    "Read the three venues in the report.",
+    "Tap Approve, then tell Claude \"go\"."
+   ],
+   "added": "2026-11-16",
+   "changed": "2026-11-16",
+   "approve": true
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "source": "Card check",
+ "updated": "2026-11-16T02:30:00+08:00",
+ "items": [
+  {
+   "id": "cg-20261116",
+   "t": "Card guarantee changes",
+   "d": "Les Amis to card required; Odette after confirmation; Zén prices.",
+   "prio": "Medium",
+   "need": "Your approval for the three card-guarantee changes.",
+   "look": "Move Les Amis to card required. Add Odette once the restaurant confirms. Add the Zén prices.",
+   "where": "Card guarantee check report, 15 Nov 2026",
+   "steps": [
+    "Review the three changes.",
+    "Tap Approve, then tell Claude \"go\"."
+   ],
+   "added": "2026-11-16",
+   "changed": "2026-11-16",
+   "approve": true
+  }
+ ]
+}

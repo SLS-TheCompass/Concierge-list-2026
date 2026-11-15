@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03T15:40:00+08:00",
+ "updated": "2026-11-16T02:30:00+08:00",
  "waiting": [
   {
    "t": "Dishes review for approval",
@@ -16,20 +16,6 @@
    "changed": "2026-10-28",
    "hist": "Open at the last check, 28 Oct 2026.",
    "approve": true
-  },
-  {
-   "t": "Weekly edition day and time",
-   "d": "Needed to set the calendar reminder.",
-   "look": "Tell me the day and time you want each new weekly edition prepared.",
-   "where": "Reply in the chat",
-   "prio": "High",
-   "need": "The day and time you want each new weekly edition prepared.",
-   "steps": [
-    "Decide the day and time.",
-    "Tell me in the chat so I can set the calendar reminder."
-   ],
-   "changed": "2026-10-28",
-   "hist": "Open at the last check, 28 Oct 2026."
   },
   {
    "t": "Attractions and Shopping lists",
@@ -97,41 +83,6 @@
    ],
    "changed": "2026-10-28",
    "hist": "Open at the last check, 28 Oct 2026.",
-   "approve": true
-  },
-  {
-   "id": "card",
-   "t": "Card guarantee updates",
-   "d": "List ready",
-   "look": "Which venues need a card guarantee for reservations. The list is ready to apply once you approve it.",
-   "where": "Card guarantee list",
-   "prio": "Medium",
-   "need": "Your approval to apply the card guarantee list.",
-   "steps": [
-    "Review the prepared list.",
-    "Tell me \"go\" and I add it to the app."
-   ],
-   "changed": "2026-10-28",
-   "hist": "Open at the last check, 28 Oct 2026.",
-   "approve": true
-  },
-  {
-   "id": "cb-load",
-   "t": "Compass Book: load one edition at a time, Archive, search",
-   "d": "Keeps the Compass Book fast as editions are added.",
-   "look": "Today all editions sit in one file (about 315 KB for 18 editions, growing about 17 KB a week). Plan: a small index file, each edition in its own file loaded on tap, the latest 4 to 6 editions shown with older ones under Archive, and one search across all editions.",
-   "where": "Compass Book",
-   "prio": "Medium",
-   "need": "Your go-ahead. I check how the app loads the book first, then show you a preview before anything is published.",
-   "steps": [
-    "Check how the app loads the book today.",
-    "Build the index, per-edition files, Archive and search.",
-    "Show you a preview.",
-    "Publish only after you say publish."
-   ],
-   "changed": "2026-11-03",
-   "added": "2026-11-03",
-   "hist": "Added 3 Nov 2026.",
    "approve": true
   }
  ]
