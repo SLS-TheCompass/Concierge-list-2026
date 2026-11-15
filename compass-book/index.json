@@ -1,6 +1,6 @@
 {
 "note": "Compass Book index. Each edition is in its own file; search.json holds the text for searching.",
-"updated": "2026-11-03",
+"updated": "2026-11-16",
 "editions": [
 {
 "num": "001",
@@ -1311,6 +1311,63 @@
 }
 ],
 "file": "compass-book/ed018.json"
+},
+{
+"num": "019",
+"range": "16 Nov – 22 Nov 2026",
+"heads": [
+"Orchard Road Christmas Light-Up",
+"Mizuho Blue Challenge – The Kallang Football Series: Singapore v Brazil, Japan v Paraguay",
+"5 Seconds of Summer: Everyone’s A Star! World Tour"
+],
+"sections": [
+{
+"id": "e019-1",
+"cat": "Highlights",
+"label": "This Week at a Glance"
+},
+{
+"id": "e019-2",
+"cat": "Highlights",
+"label": "Recommended Highlights This Week"
+},
+{
+"id": "e019-3",
+"cat": "F&B Promotions",
+"label": "F&B Promotions"
+},
+{
+"id": "e019-9",
+"cat": "Events",
+"label": "Events & Festivals"
+},
+{
+"id": "e019-20",
+"cat": "Restaurants & Bars",
+"label": "Restaurants & Bars"
+},
+{
+"id": "e019-24",
+"cat": "Hotel News",
+"label": "Hotel & Hospitality News"
+},
+{
+"id": "e019-25",
+"cat": "Transport",
+"label": "Transport & Operational Updates"
+},
+{
+"id": "e019-26",
+"cat": "Itineraries",
+"label": "Suggested Itineraries"
+},
+{
+"id": "e019-30",
+"cat": "Other",
+"label": "Quick Reference"
+}
+],
+"file": "compass-book/ed019.json"
 }
 ]
 }
