@@ -16,7 +16,21 @@
    ],
    "added": "2026-11-16",
    "changed": "2026-11-16",
-   "approve": true
+   "approve": true,
+   "venues": [
+    {
+     "name": "Chai Chuan Tou Yang Rou Tang",
+     "fact": "Ready to add"
+    },
+    {
+     "name": "Yong Chun Wan Ton Noodle",
+     "fact": "Ready to add"
+    },
+    {
+     "name": "Tea Chapter",
+     "fact": "Ready to add"
+    }
+   ]
   }
  ]
 }
