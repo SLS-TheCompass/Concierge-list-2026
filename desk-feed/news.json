@@ -1,6 +1,6 @@
 {
  "source": "News watch",
- "updated": "2026-11-19T17:30:00+08:00",
+ "updated": "2026-11-19T21:10:00+08:00",
  "items": [
   {
    "id": "nw-20261115-adventure-cove",
@@ -10,6 +10,54 @@
    "need": "Read it and decide whether guests, the Directory or the next edition need a change.",
    "look": "Resorts World Sentosa announced on 15 Nov that the waterpark will be temporarily closed from 1 January to 31 December 2027, with a new concept to follow and details later. Season pass holders will be contacted by RWS; ticket holders affected will have options. Guests booking 2027 trips should be told. Not in the Directory, so no entry to change. Suggested for the next edition's news.",
    "where": "AsiaOne, Yahoo News Singapore, Red Hot Singapore, 15 to 18 Nov 2026 (The Straits Times is blocked for me)",
+   "steps": [
+    "Read the story.",
+    "Tap Approve once you have seen it, or tell Claude what to change."
+   ],
+   "added": "2026-11-19",
+   "changed": "2026-11-19",
+   "approve": true
+  },
+  {
+   "id": "nw-20261117-bts-concerts",
+   "t": "BTS at the National Stadium, 17, 19, 20 and 22 Dec: all sold out",
+   "d": "Four sold-out nights plus month-long fan events islandwide in December.",
+   "prio": "High",
+   "need": "Read it and decide whether guests, the Directory or the next edition need a change.",
+   "look": "BTS play the National Stadium on 17, 19, 20 and 22 December at 7pm; all tickets are sold out. Fan events run across the city through December (Jewel, National Gallery, National Museum, Sentosa and more). Expect heavy crowds, hotel demand and ride-hailing surges around those dates; point guests without tickets to the fan events. Jewel Changi Airport is in the Directory; no entry needs changing.",
+   "where": "STB, Her World, Time Out, Honeycombers, Kristal Media (checked 19 Nov 2026)",
+   "steps": [
+    "Read the story.",
+    "Tap Approve once you have seen it, or tell Claude what to change."
+   ],
+   "added": "2026-11-19",
+   "changed": "2026-11-19",
+   "approve": true
+  },
+  {
+   "id": "nw-20261102-changi-vapes",
+   "t": "Changi T4: 5,272 vapes seized from arrivals; repeat visitors banned",
+   "d": "Seizure of 26 Oct; short-term visitors who re-offend are banned from re-entry.",
+   "prio": "Low",
+   "need": "Read it and decide whether guests, the Directory or the next edition need a change.",
+   "look": "Reported by the 19 Nov news watch from Mothership (2 Nov): four arrivals were caught with 5,272 vapes on 26 Oct. Remind guests not to bring vapes into Singapore. Not checked again by me.",
+   "where": "Mothership, 2 Nov 2026 (via news watch run)",
+   "steps": [
+    "Read the story.",
+    "Tap Approve once you have seen it, or tell Claude what to change."
+   ],
+   "added": "2026-11-19",
+   "changed": "2026-11-19",
+   "approve": true
+  },
+  {
+   "id": "nw-20261106-gyu-kaku",
+   "t": "Gyu-Kaku leaves Singapore; last outlet at Chijmes closed 15 Nov",
+   "d": "Japanese yakiniku chain no longer in Singapore.",
+   "prio": "Low",
+   "need": "Read it and decide whether guests, the Directory or the next edition need a change.",
+   "look": "Reported by the 19 Nov news watch from Mothership (6 Nov). Not in the Directory, so no change. Not checked again by me.",
+   "where": "Mothership, 6 Nov 2026 (via news watch run)",
    "steps": [
     "Read the story.",
     "Tap Approve once you have seen it, or tell Claude what to change."
