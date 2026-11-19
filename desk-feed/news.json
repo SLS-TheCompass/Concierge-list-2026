@@ -1,0 +1,22 @@
+{
+ "source": "News watch",
+ "updated": "2026-11-19T17:30:00+08:00",
+ "items": [
+  {
+   "id": "nw-20261115-adventure-cove",
+   "t": "Adventure Cove Waterpark closes for all of 2027",
+   "d": "Closed 1 Jan to 31 Dec 2027 for a major refurbishment. Announced 15 Nov.",
+   "prio": "High",
+   "need": "Read it and decide whether guests, the Directory or the next edition need a change.",
+   "look": "Resorts World Sentosa announced on 15 Nov that the waterpark will be temporarily closed from 1 January to 31 December 2027, with a new concept to follow and details later. Season pass holders will be contacted by RWS; ticket holders affected will have options. Guests booking 2027 trips should be told. Not in the Directory, so no entry to change. Suggested for the next edition's news.",
+   "where": "AsiaOne, Yahoo News Singapore, Red Hot Singapore, 15 to 18 Nov 2026 (The Straits Times is blocked for me)",
+   "steps": [
+    "Read the story.",
+    "Tap Approve once you have seen it, or tell Claude what to change."
+   ],
+   "added": "2026-11-19",
+   "changed": "2026-11-19",
+   "approve": true
+  }
+ ]
+}
